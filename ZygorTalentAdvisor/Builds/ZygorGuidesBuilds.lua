@@ -585,6 +585,75 @@ ZygorTalentAdvisor:RegisterBuild("HUNTER","debug Zygor Hunter broken",{
 	"Improved Tracking",
 })
 
+ZygorTalentAdvisor:RegisterBuild("HUNTER","Wowhead Marksman PVE (7/51/7)",[[
+	3/3 Focused Aim
+	5/5 Lethal Shots
+	3/3 Careful Aim
+	3/3 Improved Hunter's Mark
+	5/5 Mortal Shots
+	1/2 Go for the Throat
+	3/3 Improved Arcane Shot
+	1/1 Aimed Shot
+	3/3 Improved Stings
+	1/1 Readiness
+	3/3 Barrage
+	2/2 Combat Experience
+	3/3 Ranged Weapon Specialization
+	3/3 Piercing Shots
+	3/3 Improved Barrage
+	5/5 Master Marksman
+	3/3 Wild Quiver
+	1/1 Silencing Shot
+	5/5 Marked for Death
+	1/1 Chimera Shot
+	5/5 Improved Aspect of the Hawk
+	2/2 Focused Fire
+	5/5 Improved Tracking
+	2/2 Survival Instincts
+]],[[
+	Major Glyph of Serpent Sting
+	Major Glyph of Chimera Shot
+	Major Glyph of Steady Shot
+	Minor Glyph of Feign Death
+	Minor Glyph of Mend Pet
+	Minor Glyph of Revive Pet
+]])
+
+ZygorTalentAdvisor:RegisterBuild("HUNTER","Wowhead Beast Mastery PVE (53/13/5)",[[
+	5/5 Improved Aspect of the Hawk
+	1/5 Endurance Training
+	2/2 Focused Fire
+	2/2 Improved Revive Pet
+	1/1 Aspect Mastery
+	5/5 Unleashed Fury
+	1/2 Improved Mend
+	5/5 Ferocity
+	1/1 Intimidation
+	2/2 Bestial Discipline
+	2/2 Animal Handler
+	3/5 Frenzy
+	3/3 Ferocious Inspiration
+	1/1 Bestial Wrath
+	1/3 Catlike Reflexes
+	5/5 Serpent's Swiftness
+	1/1 The Beast Within
+	3/3 Longevity
+	3/3 Cobra Strikes
+	5/5 Kindred Spirits
+	1/1 Beast Mastery
+	5/5 Lethal Shots
+	3/3 Careful Aim
+	5/5 Mortal Shots
+	5/5 Improved Tracking
+]],[[
+	Major Glyph of Bestial Wrath
+	Major Glyph of Serpent Sting
+	Major Glyph of Steady Shot
+	Minor Glyph of Feign Death
+	Minor Glyph of Mend Pet
+	Minor Glyph of Revive Pet
+]])
+
 -- remember, for land/air type pets the corresponding talents are Dash|Dive and Charge|Swoop - write them as shown.
 
 ZygorTalentAdvisor:RegisterBuild("PET Ferocity","Zygor Ferocity (Wolf suggested)",[[
@@ -676,6 +745,49 @@ ZygorTalentAdvisor:RegisterBuild("PET Tenacity","debug Zygor Hunter bear cobra",
 	"Silverback",
 	"Silverback",
 })
+
+ZygorTalentAdvisor:RegisterBuild("PET Ferocity","Wowhead Marksman Ferocity (Wolf suggested)",[[
+	Cobra Reflexes		//LVL20
+	Cobra Reflexes		//LVL24
+	Dash				//LVL28
+	Spiked Collar		//LVL32
+	Spiked Collar		//LVL36
+	Spiked Collar		//LVL40
+	Bloodthirsty		//LVL44
+	Culling the Herd	//LVL48
+	Culling the Herd	//LVL52
+	Culling the Herd	//LVL56
+	Spider's Bite		//LVL60
+	Spider's Bite		//LVL64
+	Spider's Bite		//LVL68
+	Call of the Wild	//LVL72
+	Rabid				//LVL76
+	Wild Hunt			//LVL80
+]])
+
+ZygorTalentAdvisor:RegisterBuild("PET Ferocity","Wowhead Beast Mastery Ferocity (Wolf suggested)",[[
+	Cobra Reflexes		//LVL20
+	Cobra Reflexes		//LVL24
+	Dash				//LVL28
+	Spiked Collar		//LVL32
+	Spiked Collar		//LVL36
+	Spiked Collar		//LVL40
+	Bloodthirsty		//LVL44
+	Bloodthirsty		//LVL48
+	Culling the Herd	//LVL52
+	Culling the Herd	//LVL56
+	Culling the Herd	//LVL60
+						//At level 60, you get 4 extra pet talents with the beast mastery.
+	Spider's Bite		//LVL60
+	Spider's Bite		//LVL60
+	Spider's Bite		//LVL60
+	Call of the Wild	//LVL60
+	Wild Hunt			//LVL64
+	Wild Hunt			//LVL68
+	Rabid				//LVL72
+	Shark Attack		//LVL76
+	Shark Attack		//LVL80
+]])
 
 ZygorTalentAdvisor:RegisterBuild("MAGE","Zygor Frost Leveling (20 / 0 / 51)",[[
 	5/5 Improved Frostbolt
