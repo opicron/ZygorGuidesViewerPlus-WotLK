@@ -2570,7 +2570,7 @@ ZygorTalentAdvisor:RegisterBuild("PALADIN","Zygor Protection (0 / 53 / 18)",[[
 	Minor Glyph of Sense Undead
 ]])
 
-ZygorTalentAdvisor:RegisterBuild("PALADIN","Icy-Veins RET Paladin (11/5/55)",[[
+ZygorTalentAdvisor:RegisterBuild("PALADIN","Icy-Veins RET Paladin (11 / 5 / 55)",[[
 	5/5 Benediction
 	2/2 Improved Judgements
 	3/3 Heart of the Crusader
@@ -2608,7 +2608,7 @@ ZygorTalentAdvisor:RegisterBuild("PALADIN","Icy-Veins RET Paladin (11/5/55)",[[
 	Minor Glyph of Sense Undead
 ]])
 
-ZygorTalentAdvisor:RegisterBuild("PALADIN","Rando RET Paladin (11/5/55)",[[
+ZygorTalentAdvisor:RegisterBuild("PALADIN","Rando RET Paladin (11 / 5 / 55)",[[
 // https://www.youtube.com/watch?v=bBO5W1YcZRo
 	5/5 Benediction
 	2/2 Improved Judgements
@@ -2645,6 +2645,70 @@ ZygorTalentAdvisor:RegisterBuild("PALADIN","Rando RET Paladin (11/5/55)",[[
 	Minor Glyph of Blessing of Kings
 	Minor Glyph of Lay on Hands
 	Minor Glyph of Sense Undead
+]])
+
+ZygorTalentAdvisor:RegisterBuild("PALADIN","GPT Retribution DPS Raiding (11 / 5 / 55)",[[
+    // Levels 10-14: Retribution Tree
+    5/5 Benediction
+    // Levels 15-16: Retribution Tree
+    2/2 Improved Judgements
+    // Levels 17-19: Retribution Tree
+    3/3 Heart of the Crusader
+    // Level 20: Retribution Tree
+    1/1 Seal of Command
+    // Levels 21-25: Retribution Tree
+    5/5 Conviction
+    // Levels 26-28: Retribution Tree
+    3/3 Crusade
+    // Levels 29-30: Retribution Tree
+    2/2 Pursuit of Justice
+    // Levels 31-33: Retribution Tree
+    3/3 Sanctity of Battle
+    // Levels 34-36: Retribution Tree
+    3/3 Vengeance
+    // Level 37: Retribution Tree
+    1/1 Sanctified Retribution
+    // Levels 38-40: Retribution Tree
+    2/2 The Art of War
+    // Levels 41-43: Retribution Tree
+    3/3 Fanaticism
+    // Levels 44-45: Retribution Tree
+    2/2 Sanctified Wrath
+    // Level 46: Retribution Tree
+    1/1 Repentance
+    // Level 47: Retribution Tree
+    1/1 Crusader Strike
+    // Levels 48-50: Retribution Tree
+    3/3 Sheath of Light
+    // Levels 51-53: Retribution Tree
+    3/3 Righteous Vengeance
+    // Levels 54-56: Retribution Tree
+    3/3 Swift Retribution
+    // Level 57: Retribution Tree
+    1/1 Divine Storm
+    // Levels 58-62: Protection Tree
+    5/5 Divine Strength
+    // Levels 63-67: Holy Tree
+    5/5 Seals of the Pure
+    // Levels 68-72: Holy Tree
+    5/5 Divine Intellect
+    // Level 73: Holy Tree
+    1/1 Aura Mastery
+    // Levels 74-75: Retribution Tree
+    2/2 Improved Blessing of Might
+    // Levels 76-77: Retribution Tree
+    2/2 Judgements of the Wise
+    // Level 78: Retribution Tree
+    1/1 Improved Blessing of Might
+    // Levels 79-80: Retribution Tree
+    2/2 Judgements of the Wise
+]],[[
+    Major Glyph of Judgement
+    Major Glyph of Seal of Vengeance
+    Major Glyph of Consecration
+    Minor Glyph of Sense Undead
+    Minor Glyph of Lay on Hands
+    Minor Glyph of Blessing of Kings
 ]])
 
 ZygorTalentAdvisor:RegisterBuild("PRIEST","Zygor Shadow Raiding",{

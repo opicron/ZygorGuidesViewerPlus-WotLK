@@ -34,6 +34,10 @@ ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Exploration Achieve
 ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Elwynn Forest",[[
     author ErebusAres
     next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Westfall
+    step //0
+        .'Start from Stormwind|goto Stormwind|noway|c
+    step //0
+        .'Travel to Elwynn Forest|goto Elwynn Forest|noway|c
     step //1
         .'Begin in Stormwind City and head to Valley of Heroes|achieve 776/4 |goto Elwynn Forest,32.4,50
     step //2
@@ -63,6 +67,8 @@ ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kin
 ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Westfall",[[
     author ErebusAres
     next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Duskwood
+    step //0
+        .'Travel to Westfall|goto Westfall|noway|c
     step //1
         .'Begin at the Bridge connecting Elwynn Forest and Westfall |goto Westfall,61.7,18
     step //2
@@ -104,6 +110,8 @@ ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kin
 ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Duskwood",[[
     author ErebusAres
     next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Stranglethorn Vale
+    step //0
+        .'Travel to Duskwood|goto Duskwood|noway|c
     step //1
         .'Begin at the border between Westfall and Duskwood |goto Duskwood,9,62
     step //2
@@ -145,6 +153,8 @@ ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kin
 ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Stranglethorn Vale",[[
     author ErebusAres
     next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Redridge Mountains
+    step //0
+        .'Travel to Stranglethorn Vale|goto Stranglethorn Vale|noway|c
     step //1
         .'Begin at the border between Duskwood and Stranglethorn Vale |goto Stranglethorn Vale,44,88
     step //2
@@ -180,10 +190,76 @@ ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kin
     step //5.1 (Flight Masters)
         goto Stranglethorn Vale,38.2,4
         .talk Nizzle##24366
-        ..fpath Rebel Camp
+        ..fpath Nijel's Point
     step //5.2
         goto Stranglethorn Vale,27.6,77.6
         .talk Gyll##2859
         ..fpath Booty Bay
 ]])
+
+ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Redridge Mountains",[[
+    author ErebusAres
+    next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Burning Steppes
+    step //0
+        .'Fly to Darkshire in Duskwood|goto Darkshire|noway|c|and
+        .'Travel North by Northeast to Redridge Mountains|goto Redridge Mountains|noway|c
+    step //1
+        .'Unlock Lakeshire|achieve 780/1|goto Redridge Mountains,28,47
+        .'Unlock Lake Everstill|achieve 780/2|goto Redridge Mountains,39,55
+        .'Unlock Three Corners|achieve 780/3|goto Redridge Mountains,15,71
+        .'Unlock Lakeridge Highway|achieve 780/4|goto Redridge Mountains,29,67
+        .'Unlock Redridge Canyons|achieve 780/5|goto Redridge Mountains,33,23
+        .'Unlock Alther's Millagazor|achieve 780/6|goto Redridge Mountains,53,42
+        .'Unlock Stonewatch|achieve 780/7|goto Redridge Mountains,66,53
+        .'Unlock Render's Valley|achieve 780/8|goto Redridge Mountains,73,77
+        .'Unlock Render's Camp|achieve 780/9|goto Redridge Mountains,42,17
+        .'Unlock Stonewatch Falls|achieve 780/10|goto Redridge Mountains,73,62
+        .'Unlock Galardell Valley|achieve 780/11|goto Redridge Mountains,78,39
+    step //2
+        goto Redridge Mountains,30.6,59.4
+        .talk Ariena Stormfeather##931
+        ..fpath Lakeshire
+]])
+
+ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Burning Steppes",[[
+    author ErebusAres
+    next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Searing Gorge
+    step //0
+        .'Travel Burning Steppes|goto Burning Steppes|noway|c
+    step //1
+        .'Unlock Dreadmaul Rock |achieve 775/1|goto Burning Steppes,81,42
+        .'Unlock Morgan's Vigil |achieve 775/2|goto Burning Steppes,84,68
+        .'Unlock Terror Wing Path |achieve 775/3|goto Burning Steppes,93,45
+        .'Unlock Blackrock Pass |achieve 775/4|goto Burning Steppes,77,68
+        .'Unlock Ruins of Thaurissan |achieve 775/5|goto Burning Steppes,65,40
+        .'Unlock The Pillar of Ash |achieve 775/6|goto Burning Steppes,49,55
+        .'Unlock Blackrock Stronghold |achieve 775/7|goto Burning Steppes,40,35
+        .'Unlock Draco'dar |achieve 775/8|goto Burning Steppes,23,63
+        .'Unlock Altar of Storms |achieve 775/9|goto Burning Steppes,17,29
+        .'Unlock Blackrock Mountain |achieve 775/10|goto Burning Steppes,29,37
+    step //2
+        goto Burning Steppes,84.4,68.2
+        .talk Borgus Stoutarm##2299
+        ..fpath Morgan's Vigil
+]])
+
+ZygorGuidesViewer:RegisterGuide("Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Searing Gorge",[[
+    author ErebusAres
+    next Corey's Achievement Guides\\Explore Eastern Kingdoms\\Explore Badlands
+    step //0
+        .'Travel Searing Gorge|goto Searing Gorge|noway|c
+    step //1
+        .'Unlock  Firewatch Ridge |achieve 774/1|goto Searing Gorge,33,43
+        .'Unlock  The Cauldron |achieve 774/2|goto Searing Gorge,49,50
+        .'Unlock  Blackchar Cave |achieve 774/3|goto Searing Gorge,22,80
+        .'Unlock  The Sea of Cinders |achieve 774/4|goto Searing Gorge,46,72
+        .'Unlock  Tanner Camp |achieve 774/5|goto Searing Gorge,71,70
+        .'Unlock  Grimesilt Dig Site |achieve 774/6|goto Searing Gorge,65,59
+        .'Unlock  Dustfire Valley |achieve 774/7|goto Searing Gorge,72,27
+    step //2
+        goto Searing Gorge,37.8,30.6
+        .talk Lanie Reed##2941
+        ..fpath Thorium Point
+]])
+
 ZygorGuidesViewer.AllianceInstalled=true --!TRIAL
