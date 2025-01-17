@@ -1281,7 +1281,7 @@ ZygorTalentAdvisor:RegisterBuild("PRIEST","Zygor Shadow DPS (13 / 0 / 58)",[[
 	Minor Glyph of Shadowfiend
 ]])
 
-ZygorTalentAdvisor:RegisterBuild("PRIEST","WT Shadow Raid DPS (14 / 0 / 57)",[[
+ZygorTalentAdvisor:RegisterBuild("PRIEST","Wowhead Shadow Raid DPS (14 / 0 / 57)",[[
 // https://www.warcrafttavern.com/wotlk/guides/pve-shadow-priest-talents-builds-glyphs/
 	5 Darkness
 	5 Twin Disciplines
@@ -1295,7 +1295,7 @@ ZygorTalentAdvisor:RegisterBuild("PRIEST","WT Shadow Raid DPS (14 / 0 / 57)",[[
 	2 Shadow Reach
 	3 Shadow Weaving
 	1 Vampiric Embrace
-	2 Focused Mind
+	2/3 Focused Mind
 	2 Veiled Shadows
 	3 Improved Devouring Plague
 	2 Mind Melt
@@ -2565,6 +2565,83 @@ ZygorTalentAdvisor:RegisterBuild("PALADIN","Zygor Protection (0 / 53 / 18)",[[
 	Major Glyph of Divine Plea
 	Major Glyph of Hammer of the Righteous
 	Major Glyph of Seal of Vengeance
+	Minor Glyph of Blessing of Kings
+	Minor Glyph of Lay on Hands
+	Minor Glyph of Sense Undead
+]])
+
+ZygorTalentAdvisor:RegisterBuild("PALADIN","Icy-Veins RET Paladin (11/5/55)",[[
+	5/5 Benediction
+	2/2 Improved Judgements
+	3/3 Heart of the Crusader
+	2/2 Improved Blessing of Might
+	5/5 Conviction
+	1/1 Seal of Command
+	2/2 Pursuit of Justice
+	3/3 Sanctity of Battle
+	3/3 Crusade
+	3/3 Two-Handed Weapon Specialization
+	1/1 Sanctified Retribution
+	3/3 Vengeance
+	2/2 The Art of War
+	1/1 Repentance
+	3/3 Judgements of the Wise
+	3/3 Fanaticism
+	2/2 Sanctified Wrath
+	3/3 Swift Retribution
+	1/1 Crusader Strike
+	3/3 Sheath of Light
+	3/3 Righteous Vengeance
+	1/1 Divine Storm
+	5/5 Divine Strength
+	3/3 Stoicism
+	2/2 Guardian's Favor
+	1/1 Divine Sacrifice
+	4/5 Toughness
+	1/2 Divine Guardian
+]],[[
+	Major Glyph of Seal of Vengeance
+	Major Glyph of Judgement
+	Major Glyph of Concentration
+	Minor Glyph of Blessing of Kings
+	Minor Glyph of Lay on Hands
+	Minor Glyph of Sense Undead
+]])
+
+ZygorTalentAdvisor:RegisterBuild("PALADIN","Rando RET Paladin (11/5/55)",[[
+// https://www.youtube.com/watch?v=bBO5W1YcZRo
+	5/5 Benediction
+	2/2 Improved Judgements
+	3/3 Heart of the Crusader
+	2/2 Improved Blessing of Might
+	5/5 Conviction
+	1/1 Seal of Command
+	2/2 Pursuit of Justice
+	3/3 Crusade
+	3/3 Sanctity of Battle
+	1/1 Sanctified Retribution
+	3/3 Two-Handed Weapon Specialization
+	3/3 Vengeance
+	3/3 Judgements of the Wise
+	1/1 Repentance
+	2/2 The Art of War
+	3/3 Fanaticism
+	2/2 Sanctified Wrath
+	3/3 Swift Retribution
+	1/1 Crusader Strike
+	3/3 Sheath of Light
+	3/3 Righteous Vengeance
+	1/1 Divine Storm
+// Protection Tree
+	5/5 Divine Strength
+// Holy Tree
+	5/5 Seals of the Pure
+	5/5 Divine Intellect
+	1/1 Aura Mastery
+]],[[
+	Major Glyph of Judgement
+	Major Glyph of Seal of Vengeance
+	Major Glyph of Consecration
 	Minor Glyph of Blessing of Kings
 	Minor Glyph of Lay on Hands
 	Minor Glyph of Sense Undead
