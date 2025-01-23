@@ -14075,7 +14075,9 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Levels (66-68
 		goto 31.4,57.8
 		.talk Gezhe##18265
 		..turnin The Consortium Needs You!##9913
-		..accept Stealing from Thieves##9882
+		..accept Stealing from Thieves##9882 
+		.' Skip Stealing from Thieves if you're Friendly or Higher|condition rep('The Consortium')>=Friendly|tip Skip if you don't see the quest as well.|or
+
 	step //20
 		goto 31.8,56.8
 		.talk Shadrek##18333
@@ -14085,7 +14087,7 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Levels (66-68
 		goto 33.4,62.4
 		.' Click the Oshu'gun Crystal Fragments on the ground|tip They are the green and white crystals on the ground.
 		.' Kill the mobs here
-		.get 10 Oshu'gun Crystal Fragment##25416 |q 9882/1
+		.get 10 Oshu'gun Crystal Fragment##25416 |goal 10 Oshu'gun Crystal Fragment collected |q 9882/1|tip Skip doing so if you didnt pick up the Stealing From Thieves quest.
 	step //22
 		goto 30.6,67.5
 		.kill 8 Voidspawn|q 9925/1
@@ -14699,7 +14701,7 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Levels (66-68
 		home Toshley's Station
 	step //159
 		goto 60.2,68.9|n
-		.talk Tally Zapnabber##21460
+		.talk Rally Zapnabber##21461
 		..'Go to the Singing Ridge|goto Blade's Edge Mountains,67.0,72.0,4|noway|c
 	step //160
 		goto 66.4,75.9
