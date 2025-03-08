@@ -1953,6 +1953,87 @@ ZygorTalentAdvisor:RegisterBuild("SHAMAN","Zygor Restoration (0 / 16/ 55)",[[
 	Minor Glyph of Astral Recall
 ]])
 
+ZygorTalentAdvisor:RegisterBuild("SHAMAN","WH Leveling ENH (19/52/0)",[[
+	3/3 Enhancing Totems
+	2/5 Ancestral Knowledge
+	5/5 Thundering Strikes
+	1/1 Shamanistic Focus
+	3/3 Elemental Weapons
+	1/3 Improved Shields
+	5/5 Flurry
+	1/1 Spirit Weapons
+	3/3 Mental Dexterity
+	1/2 Improved Windfury Totem
+	3/3 Unleashed Rage
+	2/3 Weapon Mastery
+	1/1 Stormstrike
+	1/1 Dual Wield
+	3/3 Weapon Mastery
+	2/3 Dual Weapon Specialization
+	1/1 Lava Lash
+	2/2 Improved Stormspike
+	2/2 Improved Windfury Totem
+	1/3 Static Shock
+	1/1 Shamanistic Rage
+	3/3 Mental Quickness
+	2/3 Static Shock
+	5/5 Maelstrom Weapon
+	1/1 Feral Spirit
+	5/5 Concussion
+	3/3 Call of Flame
+	2/3 Elemental Devastation
+	1 Elemental Focus
+	4/5 Elemental Fury
+	2/2 Improved Fire Nova
+	3/3 Elemental Devastation
+	5/5 Elemental Fury
+	3/3 Dual Weapon Specialization
+]],[[
+	Major Glyph of Flametongue Weapon
+	Major Glyph of Stormstrike
+	Major Glyph of Fire Nova
+	Minor Glyph of Water Walking
+	Minor Glyph of Water Breathing
+	Minor Glyph of Renewed Life
+]])
+
+ZygorTalentAdvisor:RegisterBuild("SHAMAN","WH Enhancement Raid (19/52/0)",[[
+	3/3 Enhancing Totems
+	3/5 Ancestral Knowledge
+	5/5 Thundering Strikes
+	1/1 Shamanistic Focus
+	3/3 Elemental Weapons
+	5/5 Flurry
+	1/1 Spirit Weapons
+	3/3 Mental Dexterity
+	2/2 Improved Windfury Totem
+	3/3 Unleashed Rage
+	3/3 Weapon Mastery
+	1/1 Stormstrike
+	1/1 Dual Wield
+	3/3 Dual Weapon Specialization
+	1/1 Lava Lash
+	1/2 Improved Stormspike
+	3/3 Static Shock
+	1/1 Shamanistic Rage
+	3/3 Mental Quickness
+	5/5 Maelstrom Weapon
+	1/1 Feral Spirit
+	5/5 Concussion
+	3/3 Call of Flame
+	3/3 Elemental Devastation
+	1 Elemental Focus
+	5/5 Elemental Fury
+	2/2 Improved Fire Nova
+]],[[
+	Major Glyph of Flametongue Weapon
+	Major Glyph of Lightning Shield
+	Major Glyph of Fire Nova
+	Minor Glyph of Water Walking
+	Minor Glyph of Water Breathing
+	Minor Glyph of Renewed Life
+]])
+
 ZygorTalentAdvisor:RegisterBuild("WARLOCK","Zygor Affliction Leveling (56 / 0 / 15)",[[
 	5/5 Improved Corruption
 	2/2 Soul Siphon
