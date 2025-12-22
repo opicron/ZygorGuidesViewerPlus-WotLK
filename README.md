@@ -18,6 +18,7 @@ Expanded with borders:
 
 * Ding80's guides
 * Danaton Quest Instance guides
+  * https://github.com/danaton/ZygorGuidesWoTLK-ClassicPlus
 * Corey's Achievement guides
 * Loremaster guides
 * Various Achievement guides
