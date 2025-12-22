@@ -14428,6 +14428,7 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dailies Guides\\Events\\Zalazane'
 		..turnin Zalazane's Fall##25445
 	step //22
 		'Congratulations, you've taken back Echo Isles for the Trolls!
+]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dailies Guides\\Events\\Hallow's End (October 18th - October 31st)\\Hallow's End Quests",[[
 	author support@zygorguides.com
 	description This guide section will walk you through completing the quests for the Hallow's End event.

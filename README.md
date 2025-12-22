@@ -5,11 +5,13 @@ It seems the original fork contained two versions combined. Removed a lot of cod
 
 Minimal Mode:
 
-<todo>
+<img width="634" height="453" alt="Minimal" src="https://github.com/user-attachments/assets/ab0cca87-5207-4015-9839-790cf635ac00" />
+
 
 Expanded with borders:
 
-<todo>
+<img width="604" height="452" alt="Border expanded" src="https://github.com/user-attachments/assets/a543eaa6-2a26-4210-a154-89b23c7f3947" />
+
 
 
 ## Guides:
