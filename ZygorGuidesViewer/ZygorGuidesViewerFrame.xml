@@ -196,7 +196,11 @@
 
 
 	<Frame name="ZygorGuidesViewerFrameMaster" toplevel="true" hidden="false" frameStrata="MEDIUM" parent="UIParent" movable="true" resizable="true" clampedToScreen="true">
-		<Anchors><Anchor point="CENTER" relativePoint="CENTER"><Offset x="0" y="0"/></Anchor></Anchors>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+				<Offset x="0" y="-50"/>
+			</Anchor>
+		</Anchors>
 		<Size x="40" y="40"/>
 		<Scripts>
 			<OnUpdate function="ZygorGuidesViewerFrameMaster_OnUpdate" />
@@ -440,7 +444,7 @@
 								<Anchors><Anchor point="TOPLEFT"/><Anchor point="BOTTOMRIGHT"/></Anchors>
 								<Frames>
 
-									<Button name="$parent_GuideButton" text="v" hidden="true" parentKey="GuideButton">
+									<Button name="$parent_GuideButton" text="v" hidden="false" parentKey="GuideButton">
 										<Animations>
 											<AnimationGroup name="$parent_in" parentKey="in">
 												<Animation duration="0.5" maxFramerate="30" smoothing="OUT">
@@ -569,6 +573,7 @@
 												<Scripts>
 													<OnClick>
 														if button=="LeftButton" then
+															--ZygorGuidesViewer:SetOption("Display","showcountsteps 3")
 															ZygorGuidesViewer:SetOption("Display","showcountsteps "..(ZGV.db.profile.showallsteps and ZGV.db.profile.showcountsteps or 0))
 														else
 															ZygorGuidesViewer:OpenQuickSteps()
@@ -589,7 +594,7 @@
 
 											<Button name="$parent_LockButton" parentKey="LockButton">
 												<Size x="20" y="20"/>
-												<Anchors><Anchor point="CENTER" relativePoint="TOPLEFT"><Offset x="8" y="-13"/></Anchor></Anchors>
+												<Anchors><Anchor point="CENTER" relativePoint="TOPLEFT"><Offset x="8" y="-5"/></Anchor></Anchors>
 												<NormalTexture    parentKey="ntx" file=""                ><TexCoords left="0.250" right="0.375" top="0.000" bottom="0.250"/></NormalTexture>
 												<PushedTexture    parentKey="ptx" file=""                ><TexCoords left="0.250" right="0.375" top="0.250" bottom="0.500"/></PushedTexture>
 												<HighlightTexture parentKey="htx" file="" alphaMode="ADD"><TexCoords left="0.250" right="0.375" top="0.500" bottom="0.750"/></HighlightTexture>
@@ -809,7 +814,7 @@
 
 						<Scripts>
 							<OnUpdate>
-								if this:GetVerticalScrollRange()==0 then
+								if self:GetVerticalScrollRange()==0 then
 									--ZygorGuidesViewerFrameScroll_ScrollFill:Hide()
 								else
 									--ZygorGuidesViewerFrameScroll_ScrollFill:Show()

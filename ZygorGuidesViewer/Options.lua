@@ -37,10 +37,10 @@ function me:Options_RegisterDefaults()
 			--minimode = false,
 			visible = true,
 
-			skipimpossible = false,
+			skipimpossible = true,
 
 			showmapbutton = true,
-			hideincombat = false,
+			hideincombat = true,
 
 			-- convenience
 			autoaccept = false,
@@ -52,8 +52,8 @@ function me:Options_RegisterDefaults()
 			skin = "violet",
 			skincolors={text={0.95,0.65,1.0},back={0.17,0.07,0.20}},
 			showallsteps = false,
-			hideborder = false,
-			hidestepborders = false,
+			hideborder = true,
+			hidestepborders = true,
 			showcountsteps = 1,
 			framescale = 1.0,
 			fontsize = 10,
@@ -63,10 +63,10 @@ function me:Options_RegisterDefaults()
 			backopacity = 0.3,
 			opacitymain = 1.0,
 
-			stepbackalpha = 0.5,
-			goalicons = true,
-			goalbackgrounds = true,
-			goalcolorize = false,
+			stepbackalpha = 0.0,
+			goalicons = false,
+			goalbackgrounds = false,
+			goalcolorize = true,
 			goalbackincomplete = {r=0.6,g=0.0,b=0.0,a=0.7},
 			goalbackprogressing= {r=0.6,g=0.7,b=0.0,a=0.7},
 			goalbackcomplete   = {r=0.2,g=0.7,b=0.0,a=0.7},
@@ -75,19 +75,18 @@ function me:Options_RegisterDefaults()
 			
 			goalupdateflash = true,
 			goalcompletionflash = true,
-			flashborder = true,
+			flashborder = false,
 
 			tooltipsbelow = true,
 
 			trackchains = true,
 
-			skipimpossible = false,
 			skipauxsteps = true,
 			goalbackaux        = {r=0.0,g=0.5,b=0.8,a=0.5},
 			showobsolete = true,
 			goalbackobsolete   = {r=0.0,g=0.5,b=0.8,a=0.5},
-			skipobsolete = true,
-			levelsahead = 0,
+			skipobsolete = false, --rzr true to false (avoid skips)
+			levelsahead = 80, --rzr 0 to 80 (fully avoid low level skips)
 
 			hidearrowwithguide = true,
 			iconAlpha = 1,
@@ -96,7 +95,7 @@ function me:Options_RegisterDefaults()
 			filternotes = true,
 			minimapnotedesc = true,
 
-			stepnumbers = true,
+			stepnumbers = false,
 
 			guidesinhistory = 5,
 
@@ -106,8 +105,9 @@ function me:Options_RegisterDefaults()
 			goldreqmode = 3, -- current
 			golddistmode = 1, -- in range
 
-			arrowmeters = false,
-			arrowfreeze = false,
+			arrowmeters = true,
+			arrowfreeze = true,
+			arrowsmooth = true,
 			--arrowcam = false,
 			arrowcolordir = true,
 			arrowscale = 1.0,
@@ -116,8 +116,8 @@ function me:Options_RegisterDefaults()
 			foglight = true,
 			pointeraudio = true,
 
-			arrowposx=500,
-			arrowposy=400,
+			arrowposx=60,
+			arrowposy=-20,
 
 			fullheight = 400,
 

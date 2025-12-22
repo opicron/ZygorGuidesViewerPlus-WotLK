@@ -37,11 +37,16 @@ local cuedinged=nil
 local profile={}
 
 function Pointer:Startup()
-	self:CreateArrowFrame()
+	
 
 	profile = ZGV.db.profile
+	profile.arrowfreeze = true
+	
+	self:CreateArrowFrame()
+	--self:SetupArrowFreeze()
 
-	profile.arrowsmooth = true
+	--profile.arrowsmooth = true
+	--profile.arrowfreeze = false
 
 	--[[
 	self.EventFrame = CreateFrame("FRAME")
@@ -219,6 +224,7 @@ function Pointer:CreateMapMarker (c,z,x,y,data)
 	table.zygor_join(waypoint,data)
 	-- TODO: add callbacks for distance detection
 
+	waypoint.title = "Zygor"
 	waypoint.minimapFrame.waypoint = waypoint
 	waypoint.worldmapFrame.waypoint = waypoint
 
@@ -481,6 +487,8 @@ function Pointer:CreateArrowFrame()
 
 	self:SetupArrowFreeze()
 	self:SetScale(profile.arrowscale)
+	self:SetScale(0.6)
+	self:SetFontSize(15)
 end
 
 function Pointer:SetupArrowFreeze()
@@ -548,6 +556,7 @@ local function ShowTooltip(button,tooltip)
 	if not button.waypoint or not button.waypoint.t then return end
 	tooltip:SetOwner(button,"ANCHOR_BOTTOM")
 	tooltip:ClearLines()
+	--tooltip:SetSize(20)
 	tooltip:SetText(button.waypoint.t)
 	if button.waypoint.OnEnter then
 		local r = button.waypoint:OnEnter(tooltip)
@@ -1191,6 +1200,8 @@ function Pointer.ArrowFrame_OnUpdate(self,elapsed)
 		local wheelangle = angle*16
 		sin,cos = msin(wheelangle + 2.356194)*0.71, mcos(wheelangle + 2.356194)*0.71
 		self.back:SetTexCoord(0.5-sin, 0.5+cos, 0.5+cos, 0.5+sin, 0.5-cos, 0.5-sin, 0.5+sin, 0.5-cos)
+		--self.back:SetTexture(nil)
+		self.back:SetAlpha(0.5)
 
 		--[[
 		local cell

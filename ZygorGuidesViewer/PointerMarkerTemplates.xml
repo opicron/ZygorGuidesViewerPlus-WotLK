@@ -131,6 +131,7 @@
 									<OnUpdate>
 										self.f:SetWidth(50 - self:GetSmoothProgress()*15)
 										self.f:SetHeight(50 - self:GetSmoothProgress()*15)
+										self.f:SetAlpha(0)
 									</OnUpdate>
 									<OnFinished>
 										self.f:SetWidth(50)
@@ -184,7 +185,7 @@
 		</Layers>
 
 		<Scripts>
-			<OnLoad> self:RegisterForDrag("LeftButton") self:EnableMouse(not ZGV.db.profile.arrowfreeze)  self:ClearAllPoints()  self:SetPoint("BOTTOMLEFT",UIParent,"BOTTOMLEFT",ZGV.db.profile.arrowposx,ZGV.db.profile.arrowposy) </OnLoad>
+			<OnLoad> self:RegisterForDrag("LeftButton") self:EnableMouse(not ZGV.db.profile.arrowfreeze)  self:ClearAllPoints()  self:SetPoint("TOPLEFT",UIParent,"TOPLEFT",ZGV.db.profile.arrowposx,ZGV.db.profile.arrowposy) </OnLoad>
 			<OnDragStart> self:StartMoving() self.dragging=true </OnDragStart>
 			<OnDragStop> self:StopMovingOrSizing() self.dragging=nil  ZGV.db.profile.arrowposx=self:GetLeft()+self:GetWidth()/2  ZGV.db.profile.arrowposy=self:GetBottom()+self:GetHeight()/2 </OnDragStop>
 			<OnShow> ZygorGuidesViewer.Pointer.ArrowFrame_OnShow(self) </OnShow>

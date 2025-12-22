@@ -61,19 +61,35 @@ function me:CacheSkills()
 	if not TradeSkillFrame then
 --TODO
 	end
-	for i=1,70 do
-		local skillName, header, isExpanded, skillRank, numTempPoints, skillModifier, skillMaxRank, isAbandonable, stepCost, rankCost, minLevel, skillCostType, skillDescription = GetSkillLineInfo(i)
 
-		if not header and not child and skillName then 
-			local pro = self.skills[skillName]
+	if ZGV.Cata then
+		local profs={GetProfessions()}
+		for i,prof in pairs(profs) do
+			local name,icon,rank,maxrank,numspells,spelloffset,skillline = GetProfessionInfo(prof)
+
+			local pro = self.skills[name]
 			if not pro then
-				pro={
-				}
-				self.skills[skillName]=pro
+				pro={}
+				self.skills[name]=pro
 			end
-			pro.level=skillRank
-			pro.max=skillMaxRank
+			pro.level=rank
+			pro.max=maxrank
 			pro.active=true
+		end
+	else
+		for i=1,70 do
+			local skillName, header, isExpanded, skillRank, numTempPoints, skillModifier, skillMaxRank, isAbandonable, stepCost, rankCost, minLevel, skillCostType, skillDescription = GetSkillLineInfo(i)
+
+			if not header and not child and skillName then 
+				local pro = self.skills[skillName]
+				if not pro then
+					pro={}
+					self.skills[skillName]=pro
+				end
+				pro.level=skillRank
+				pro.max=skillMaxRank
+				pro.active=true
+			end
 		end
 	end
 end

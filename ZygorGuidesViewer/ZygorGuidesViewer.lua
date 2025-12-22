@@ -42,9 +42,9 @@ BINDING_NAME_ZYGORGUIDES_OPENGUIDE = L["binding_togglewindow"]
 BINDING_NAME_ZYGORGUIDES_PREV = L["binding_prev"]
 BINDING_NAME_ZYGORGUIDES_NEXT = L["binding_next"]
 
-local _,_,_,ver = GetBuildInfo()
-local WotLK = (ver>=30000)
-
+local ver = select(4,GetBuildInfo())
+ZGV.WotLK = (ver>=30000)
+ZGV.Cata = (ver>=40000)
 
 local BZ = LibStub("LibBabble-Zone-3.0")
 local BZL = BZ:GetUnstrictLookupTable()
@@ -366,6 +366,11 @@ function me:SetGuide(name,step,temp)
 		self:Debug("Guide loaded: "..name)
 		
 		self:FocusStep(step)
+		-- Only skip forward if the current step is fully complete
+		local stepcomplete = self.CurrentStep:IsComplete()
+		if stepcomplete then
+			self:SkipStep(1, true)
+		end
 
 		ZygorGuidesViewerFrame_Border_GuideButton:UnlockHighlight()
 	else
@@ -674,11 +679,14 @@ function me:UpdateLocking()
 	if self.stepframes then
 		for s,st in ipairs(self.stepframes) do
 			st:EnableMouse(not locked)
-		--[[
 			for l,ln in ipairs(st.lines) do
-				ln.clicker:EnableMouse(not locked)
+				-- Keep goto clickers enabled even when locked for tooltips and clicking
+				if ln.clicker.isGotoClicker then
+					ln.clicker:EnableMouse(true)
+				else
+					ln.clicker:EnableMouse(not locked)
+				end
 			end
-		]]
 		end
 	end
 
@@ -844,9 +852,12 @@ function me:UpdateFrame(full,onupdate)
 			if self.spotframes[1] and self.spotframes[1]:IsVisible() then for i,spotframe in ipairs(self.spotframes) do spotframe:Hide() end end
 
 			if self.db.profile.showallsteps then
+				--self:SetOption("Display","showcountsteps 5")
 				if ZygorGuidesViewerFrameScrollScrollBar:GetValue()<1 then ZygorGuidesViewerFrameScrollScrollBar:SetValue(self.CurrentStepNum) end
 				ZygorGuidesViewerFrameScrollScrollBar:Show()
+				
 			else
+				--self:SetOption("Display","showcountsteps 1")
 				ZygorGuidesViewerFrameScrollScrollBar:Hide()
 			end
 
@@ -862,7 +873,10 @@ function me:UpdateFrame(full,onupdate)
 			--ZygorGuidesViewerFrame_Border_TitleBar_StepText:SetText(self.CurrentStepNum)
 			--ZygorGuidesViewerFrame_Border_TitleBar_StepText:Show()
 
-			ZygorGuidesViewerFrameScroll:Show()
+			-- HERE WE HAVE TO THINK WHAT TO DO!
+
+			--ZygorGuidesViewerFrameScroll:Show()
+			--self:SetOption("Display","showcountsteps 5")
 			ZygorGuidesViewerFrame_MissingText:Hide()
 
 			local totalheight = 0
@@ -963,11 +977,122 @@ function me:UpdateFrame(full,onupdate)
 										frame.lines[line].label:SetText(indent.."|cffeeeecc"..goal.info.."|r")
 										frame.lines[line].goal = nil
 									else
-										local link = ((goal.tooltip and not self.db.profile.tooltipsbelow) or (goal.x and not self.db.profile.windowlocked) or goal.image) and " |cffdd44ff*|r" or ""
+										local link = ((goal.tooltip and not self.db.profile.tooltipsbelow) or ((goal.x or (goal.map and goal.action == "goto")) and not self.db.profile.windowlocked) or goal.image) and " |cffdd44ff*|r" or ""
 
 										frame.lines[line].label:SetFont(FONT,self.db.profile.fontsize)
 										frame.lines[line].label:SetText(indent..goaltxt..link)
 										frame.lines[line].goal = goal
+										
+										-- Set up clicker for coordinate goals only
+										if goal.action == "goto" and (goal.x or goal.map) and frame.lines[line].clicker then
+											--DEFAULT_CHAT_FRAME:AddMessage("Setting up clicker for goal: " .. (goal.action or "nil") .. " x=" .. tostring(goal.x) .. " map=" .. tostring(goal.map))
+											
+											-- Make sure clicker is properly sized and positioned
+											local clicker = frame.lines[line].clicker
+											clicker:SetAllPoints(frame.lines[line])
+											-- Always enable mouse for goto clickers, even when window is locked
+											clicker:EnableMouse(true)
+											clicker:Show()
+											
+											-- Store the goal reference for tooltip access
+											clicker.goal = goal
+											-- Mark this clicker as a goto clicker so it stays enabled when locked
+											clicker.isGotoClicker = true
+											
+											-- Set up tooltip events for goto actions
+											clicker:SetScript("OnEnter", function(self)
+												ZGV:GoalOnEnter(self)
+											end)
+											clicker:SetScript("OnLeave", function(self)
+												ZGV:GoalOnLeave(self)
+											end)
+											
+											clicker:SetScript("OnClick", function(self, button)
+												--DEFAULT_CHAT_FRAME:AddMessage("Clicker OnClick fired! Button: " .. tostring(button))
+												if button == "LeftButton" then
+													if goal.x and goal.y and goal.map then
+														--DEFAULT_CHAT_FRAME:AddMessage("Clicked coordinate goal!")
+														
+														-- Function to create delayed execution
+														local function Delay(seconds, func)
+															local frame = CreateFrame("Frame")
+															local elapsed = 0
+															frame:SetScript("OnUpdate", function(self, delta)
+																elapsed = elapsed + delta
+																if elapsed >= seconds then
+																	func()
+																	self:SetScript("OnUpdate", nil)
+																	self = nil
+																end
+															end)
+														end
+														
+														-- First lookup the zone ID
+														local lookupCommand = string.format(".lookup area %s", goal.map)
+														--DEFAULT_CHAT_FRAME:AddMessage("Looking up zone ID: " .. lookupCommand)
+														SendChatMessage(lookupCommand, "SAY")
+														
+														-- Wait 0.5 seconds then check chat history for the response
+														Delay(0.5, function()
+															local foundZoneId = nil
+															local numMessages = DEFAULT_CHAT_FRAME:GetNumMessages()
+															if numMessages > 0 then
+																local message = DEFAULT_CHAT_FRAME:GetMessageInfo(numMessages)
+																if message then
+																	-- Strip color codes and keep only valid characters
+																	local cleanMessage = string.gsub(message, "|c%x+", "")
+																	cleanMessage = string.gsub(cleanMessage, "|r", "")
+																	cleanMessage = string.gsub(cleanMessage, "|H.-|h", "")
+																	cleanMessage = string.gsub(cleanMessage, "[^%w%s%[%]%-]", "")
+																	
+																	-- Look for pattern: number - [zonename
+																	local zoneId, zoneName = string.match(cleanMessage, "(%d+)%s*%-%s*%[([^%]]+)")
+																	if zoneId and zoneName then
+																		-- Remove " enUS" suffix if present
+																		zoneName = string.gsub(zoneName, "%s+enUS$", "")
+																		if string.lower(zoneName) == string.lower(goal.map) then
+																			foundZoneId = zoneId
+																		end
+																	end
+																end
+															end
+															
+															-- Use the zone ID if found, otherwise fallback
+															if foundZoneId then
+																local command = string.format(".go zonexy %s %s %s", goal.x, goal.y, foundZoneId)
+																DEFAULT_CHAT_FRAME:AddMessage("Executing: " .. command)
+																SendChatMessage(command, "SAY")
+															else
+																local command = string.format(".go zonexy %s %s", goal.x, goal.y)
+																DEFAULT_CHAT_FRAME:AddMessage("Executing: " .. command)
+																SendChatMessage(command, "SAY")
+															end
+														end)
+														
+													elseif goal.map and not goal.x then
+														DEFAULT_CHAT_FRAME:AddMessage("Clicked map-only goal!")
+														local command = string.format(".tele %s", goal.map)
+														DEFAULT_CHAT_FRAME:AddMessage("Executing: " .. command)
+														SendChatMessage(command, "SAY")
+													end
+												end
+											end)
+										else
+											-- For non-goto actions, hide/disable the clicker to prevent interference
+											if frame.lines[line].clicker then
+												frame.lines[line].clicker:Hide()
+												frame.lines[line].clicker:EnableMouse(false)
+												frame.lines[line].clicker:SetScript("OnEnter", nil)
+												frame.lines[line].clicker:SetScript("OnLeave", nil)
+												frame.lines[line].clicker:SetScript("OnClick", nil)
+												frame.lines[line].clicker.goal = nil
+												frame.lines[line].clicker.isGotoClicker = nil
+											end
+											
+											if goal.action == "goto" then
+												DEFAULT_CHAT_FRAME:AddMessage("Goto goal but no clicker setup - clicker exists: " .. tostring(frame.lines[line].clicker ~= nil))
+											end
+										end
 									end
 									line=line+1
 									--frame.lines[line].label:SetMultilineIndent(1)
@@ -1873,7 +1998,7 @@ function me:UpdateFrameCurrent()
 						if self.db.profile.goalupdateflash and self.frameNeedsResizing==0 then
 							anim_w2r.r,anim_w2r.g,anim_w2r.b,anim_w2r.a = r,g,b,a
 							anim_w2r:Play()
-							self:Debug("Animating progress: "..goal:GetText())
+							self:Debug("Progress: "..goal:GetText())
 						end
 					end
 					icon:SetIcon(actionicon[goal.action])
@@ -1889,7 +2014,7 @@ function me:UpdateFrameCurrent()
 						self.recentlyCompletedGoals[goal]=true
 						if self.db.profile.goalcompletionflash or self.db.profile.goalupdateflash and self.frameNeedsResizing==0 then
 							anim_w2g:Play()
-							self:Debug("Animating completion.")
+							self:Debug("Completion: "..goal:GetText())
 						end
 
 						-- if a goal just completed, unpause.
@@ -2100,7 +2225,7 @@ function me:AlignFrame()
 	ZygorGuidesViewerFrame_Border:SetBackdropColor(self.db.profile.skincolors.back[1],self.db.profile.skincolors.back[2],self.db.profile.skincolors.back[3],self.db.profile.backopacity)
 
 	ZygorGuidesViewerFrame_Skipper:ClearAllPoints()
-	ZygorGuidesViewerFrame_Skipper:SetPoint(UP_TOPLEFT,self.Frame,-23,-27*UP)
+	ZygorGuidesViewerFrame_Skipper:SetPoint(UP_TOPLEFT,self.Frame,0,-27*UP)
 
 	ZygorGuidesViewerFrame_Border_SectionTitle:ClearAllPoints()
 	ZygorGuidesViewerFrame_Border_SectionTitle:SetPoint(UP_TOPLEFT,ZygorGuidesViewerFrame_Border_Top,UP_TOPLEFT,30,-5*UP+1)
@@ -2110,17 +2235,17 @@ function me:AlignFrame()
 	ZygorGuidesViewerFrame_Border_TitleBar:SetPoint(UP_TOPLEFT,ZygorGuidesViewerFrame_Border,UP_TOPLEFT,0,11*UP)
 	ZygorGuidesViewerFrame_Border_TitleBar:SetPoint(UP_BOTTOMRIGHT,ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,0,-25*UP)
 
-	ZygorGuidesViewerFrame_Border_LockButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPLEFT,8,-13*UP)
-	ZygorGuidesViewerFrame_Border_MiniButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,-40,-5*UP)
-	ZygorGuidesViewerFrame_Border_SettingsButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPLEFT,40,-5*UP)
-	ZygorGuidesViewerFrame_Border_CloseButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,5,-2*UP)
+	ZygorGuidesViewerFrame_Border_LockButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPLEFT,270,-5*UP)
+	ZygorGuidesViewerFrame_Border_MiniButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,-30,-5*UP)
+	ZygorGuidesViewerFrame_Border_SettingsButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPLEFT,250,-5*UP)
+	ZygorGuidesViewerFrame_Border_CloseButton:SetPoint("CENTER",ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,-10,-5*UP)
 	
 	--ntx:SetTexCoord(731/1024,850/1024,76/512,145/512)
 	--ptx:SetTexCoord(731/1024,850/1024,211/512,280/512)
 	--htx:SetTexCoord(731/1024,850/1024,346/512,415/512)
 	ZygorGuidesViewerFrame_Border_GuideButton.upsideup = upsideup
 	ZygorGuidesViewerFrame_Border_GuideButton:ClearAllPoints()
-	ZygorGuidesViewerFrame_Border_GuideButton:SetPoint(UP_BOTTOM,ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,-58,-19*UP)
+	ZygorGuidesViewerFrame_Border_GuideButton:SetPoint(UP_BOTTOM,ZygorGuidesViewerFrame_Border,UP_TOPRIGHT,-30,-45*UP)
 	
 	if minimized then
 		ZygorGuidesViewerFrame_Skipper:Hide()
@@ -2156,37 +2281,45 @@ function me:AlignFrame()
 
 	-- textures
 	ZygorGuidesViewerFrame_Border_TopLeft:SetWidth(100)
+	ZygorGuidesViewerFrame_Border_TopLeft:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_TopLeft:SetHeight(100*1.225)
 	ZygorGuidesViewerFrame_Border_TopLeft:ClearAllPoints()
 	ZygorGuidesViewerFrame_Border_TopLeft:SetPoint(UP_TOPLEFT,-35,16*UP)
 	ZygorGuidesViewerFrame_Border_TopLeft:SetTexCoord(UPcoords(0.095703125,0.2900390625,0.12109375,0.59765625))
 
 	ZygorGuidesViewerFrame_Border_Gear1:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Gear1:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Gear1:SetPoint("CENTER",ZygorGuidesViewerFrame_Skipper,UP_TOPLEFT,10,-32*UP)
 	ZygorGuidesViewerFrame_Border_Gear2:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Gear2:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Gear2:SetPoint("CENTER",ZygorGuidesViewerFrame_Skipper,UP_TOPLEFT,4,-15*UP)
 	ZygorGuidesViewerFrame_Border_Gear3:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Gear3:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Gear3:SetPoint("CENTER",ZygorGuidesViewerFrame_Skipper,UP_TOPLEFT,20,-56*UP)
 
 	ZygorGuidesViewerFrame_Border_TopRight:SetWidth(100)
+	ZygorGuidesViewerFrame_Border_TopRight:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_TopRight:SetHeight(100*1.225)
 	ZygorGuidesViewerFrame_Border_TopRight:ClearAllPoints()
 	ZygorGuidesViewerFrame_Border_TopRight:SetPoint(UP_TOPRIGHT,35,16*UP)
 	ZygorGuidesViewerFrame_Border_TopRight:SetTexCoord(UPcoords(0.515625,0.7099609375,0.12109375,0.59765625))
 
 	ZygorGuidesViewerFrame_Border_BottomLeft:SetWidth(22)
+	ZygorGuidesViewerFrame_Border_BottomLeft:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_BottomLeft:SetHeight(22)
 	ZygorGuidesViewerFrame_Border_BottomLeft:ClearAllPoints()
 	ZygorGuidesViewerFrame_Border_BottomLeft:SetPoint(UP_BOTTOMLEFT,-3,-4*UP)
 	ZygorGuidesViewerFrame_Border_BottomLeft:SetTexCoord(UPcoords(161/1024,204/1024,385/512,428/512))
 
 	ZygorGuidesViewerFrame_Border_BottomRight:SetWidth(22)
+	ZygorGuidesViewerFrame_Border_BottomRight:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_BottomRight:SetHeight(22)
 	ZygorGuidesViewerFrame_Border_BottomRight:ClearAllPoints()
 	ZygorGuidesViewerFrame_Border_BottomRight:SetPoint(UP_BOTTOMRIGHT,3,-4*UP)
 	ZygorGuidesViewerFrame_Border_BottomRight:SetTexCoord(UPcoords(204/1024,161/1024,385/512,428/512))
 
 	ZygorGuidesViewerFrame_Border_Top:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Top:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Top:SetHeight(35)
 	ZygorGuidesViewerFrame_Border_Top:SetPoint(UP_TOPLEFT,28,11*UP)
 	ZygorGuidesViewerFrame_Border_Top:SetPoint(UP_TOPRIGHT,-25,11*UP)
@@ -2196,6 +2329,7 @@ function me:AlignFrame()
 	ZygorGuidesViewerFrame_Border_Top:SetTexCoord(UPcoords(0,1,0,1))
 
 	ZygorGuidesViewerFrame_Border_Left:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Left:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Left:SetPoint(UP_TOPLEFT,-1,-85*UP)
 	ZygorGuidesViewerFrame_Border_Left:SetPoint(UP_BOTTOMRIGHT,self.Frame,UP_BOTTOMLEFT,9,10*UP)
 	tx = ZygorGuidesViewerFrame_Border_Left:GetTexture()
@@ -2203,22 +2337,27 @@ function me:AlignFrame()
 	ZygorGuidesViewerFrame_Border_Left:SetTexture(tx,true)
 
 	ZygorGuidesViewerFrame_Border_Right:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Right:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Right:SetPoint(UP_TOPRIGHT,1,-35*UP)
 	ZygorGuidesViewerFrame_Border_Right:SetPoint(UP_BOTTOMLEFT,self.Frame,UP_BOTTOMRIGHT,-9,10*UP)
 	ZygorGuidesViewerFrame_Border_Right:SetTexture(1)
 	ZygorGuidesViewerFrame_Border_Right:SetTexture(tx,true)
 
 	ZygorGuidesViewerFrame_Border_Bottom:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Bottom:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Bottom:SetPoint(UP_TOPLEFT,self.Frame,UP_BOTTOMLEFT,13,10*UP)
 	ZygorGuidesViewerFrame_Border_Bottom:SetPoint(UP_BOTTOMRIGHT,-13,-5*UP)
 	ZygorGuidesViewerFrame_Border_Bottom:SetTexture(1)
 	ZygorGuidesViewerFrame_Border_Bottom:SetTexture(tx,true)
 
 	ZygorGuidesViewerFrame_Border_Logo:ClearAllPoints()
+	ZygorGuidesViewerFrame_Border_Logo:SetTexture(nil)
 	ZygorGuidesViewerFrame_Border_Logo:SetPoint("CENTER",ZygorGuidesViewerFrame_Border_Bottom,"CENTER",0,0)
 
 	-- flash stuff... this is a royal PITA.
 	ZygorGuidesViewerFrame_Border_Flash_Top:ClearAllPoints()
+	
+	
 	ZygorGuidesViewerFrame_Border_Flash_Top:SetHeight(80)
 	ZygorGuidesViewerFrame_Border_Flash_Top:SetPoint(UP_BOTTOMLEFT,ZygorGuidesViewerFrame_Border_Top,UP_BOTTOMLEFT,10,-8*UP)
 	ZygorGuidesViewerFrame_Border_Flash_Top:SetPoint(UP_BOTTOMRIGHT,ZygorGuidesViewerFrame_Border_Top,UP_BOTTOMRIGHT,0,-8*UP)
@@ -2553,7 +2692,7 @@ function me:SkipStep(delta,fast)
 		self.fastforward=fast
 		
 		self.LastSkip = delta
-		self:Debug("LastSkip "..self.LastSkip)
+		--self:Debug("LastSkip "..self.LastSkip)
 
 		self:FocusStepQuiet(i) --quiet!
 		skipped=skipped+1
@@ -2842,7 +2981,7 @@ function me:GoalOnClick(goalframe,button)
 end
 
 function me:GoalOnEnter(goalframe)
-	local goal = goalframe:GetParent().goal
+	local goal = goalframe.goal or (goalframe:GetParent() and goalframe:GetParent().goal)
 	if not goal then return end
 
 	local wayline,infoline,image
@@ -2856,6 +2995,13 @@ function me:GoalOnEnter(goalframe)
 			wayline = L['tooltip_waypoint_coords']:format(goal.map.." "..goal.x..";"..goal.y)
 		else
 			wayline = L['tooltip_waypoint']:format(goal.map.." "..goal.x..";"..goal.y)
+		end
+	elseif goal.map and not goal.x and goal.action == "goto" then
+		-- map-only goto goals (no coordinates)
+		if self.db.profile.windowlocked or goal.force_noway then
+			wayline = L['tooltip_waypoint_coords']:format(goal.map)
+		else
+			wayline = L['tooltip_waypoint']:format(goal.map)
 		end
 	end
 

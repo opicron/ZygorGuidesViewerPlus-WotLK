@@ -107,9 +107,9 @@ function Goal:IsComplete()
 		if self.questid and not ZGV:IsQuestPossible(self.questid) then possible=false end
 
 		local complete = ZGV.completedQuests[self.questid]
-		    or ZGV.questsbyid[self.questid]
-		    or (ZGV.instantQuests[self.questid] and ZGV.completedQuestTitles[self.quest])
-		    or (not ZGV.CurrentGuide.daily and ZGV.db.char.permaCompletedDailies[self.questid])
+				or ZGV.questsbyid[self.questid]
+				or (ZGV.instantQuests[self.questid] and ZGV.completedQuestTitles[self.quest])
+				or (not ZGV.CurrentGuide.daily and ZGV.db.char.permaCompletedDailies[self.questid])
 		return complete, complete or possible     --[[or ZGV.recentlyAcceptedQuests[id] --]]
 
 	elseif self.action=="turnin" then
@@ -122,13 +122,13 @@ function Goal:IsComplete()
 
 			--]]
 
-			-- Completed if it's in the completed bin, but NOT in the log.
-			-- If it's in the log, it couldn't be completed; this fixes some weird multiple-completion quests, like #348 Stranglethorn Fever.
-			-- completeable if it's in the log and complete or non-goaled.
+		-- Completed if it's in the completed bin, but NOT in the log.
+		-- If it's in the log, it couldn't be completed; this fixes some weird multiple-completion quests, like #348 Stranglethorn Fever.
 		local turned = (
 			ZGV.completedQuests[self.questid]
 			or (not ZGV.CurrentGuide.daily and ZGV.db.char.permaCompletedDailies[self.questid])
 			) and not inlog
+		
 		return turned, turned or (inlog and (inlog.complete or #inlog.goals==0))
 	end
 
@@ -573,7 +573,7 @@ function Goal:GetText(showcompleteness)
 				text = L["stepgoal_go to"]:format( COLOR_LOC(L['map_coords']:format(self.map,self.x,self.y)) )
 			else
 				-- just the map
-				text = L["stepgoal_go to"]:format( COLOR_LOC(("%s"):format(self.map)) )
+				text = L["stepgoal_go to"]:format( COLOR_LOC(self.map) )
 			end
 		else
 			-- same map

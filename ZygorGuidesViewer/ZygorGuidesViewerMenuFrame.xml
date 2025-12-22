@@ -17,7 +17,7 @@
 		<Anchors><Anchor	point="CENTER" relativePoint="CENTER"/></Anchors>
 		<Scripts>
 			<OnEnter>
-				GameTooltip:SetOwner(this, "CENTER")
+				GameTooltip:SetOwner(self, "CENTER")
 				GameTooltip:SetText(ZygorGuidesViewer.MapNotes[ZygorGuidesViewer.CurrentStep.mapzone][ZygorGuidesViewer.CurrentStep.mapnote].title)
 			</OnEnter>
 			<OnLeave>
@@ -217,8 +217,8 @@
 						if ZygorGuidesViewer then ZygorGuidesViewer:ToggleFilterNotes() end
 					</OnClick>
 					<OnEnter>
-						GameTooltip:SetOwner(this, "BOTTOM")
-						if this:GetChecked() then
+						GameTooltip:SetOwner(self, "BOTTOM")
+						if self:GetChecked() then
 							GameTooltip:SetText("Showing map dots for all steps")
 						else
 							GameTooltip:SetText("Showing only the current map dot")

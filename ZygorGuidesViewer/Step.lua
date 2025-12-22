@@ -53,6 +53,36 @@ function Step:IsComplete()
 			if goal.orlogic --[[and orlist[goal] --]] and orcomplete then
 				status="complete" -- don't bother to check, force
 			end
+			
+			--[[ DEBUG CODE FOR QUEST STEP SKIPPING ISSUES:
+			     Uncomment this block when investigating why specific quest steps are being skipped.
+			     Replace the questid (9520) with the problematic quest ID you want to track.
+			     This will show detailed information about quest completion status, obsolete detection,
+			     player level vs quest level, and skip settings that affect step advancement.
+			     
+			-- DEBUG: Track the Diabolical Plans step specifically
+			if goal.questid == 9520 and goal.action == "accept" then
+				local questInLog = ZGV.questsbyid[9520]
+				local isCompleted = ZGV.completedQuests[9520]
+				local maxLevel = ZGV.maxQuestLevels[9520] or 99
+				local playerLevel = UnitLevel("player")
+				local levelsAhead = ZGV.db.profile.levelsahead
+				local skipObsolete = ZGV.db.profile.skipobsolete
+				local showObsolete = ZGV.db.profile.showobsolete
+				local stepObsolete = self:IsObsolete()
+				local goalObsolete = goal:IsObsolete()
+				
+				ZGV:Print("DEBUG Diabolical Plans DETAILED:")
+				ZGV:Print("  - questid=9520, action=accept, status="..tostring(status))
+				ZGV:Print("  - questInLog="..(questInLog and "YES" or "NO"))
+				ZGV:Print("  - isCompleted="..(isCompleted and "YES" or "NO"))
+				ZGV:Print("  - maxLevel="..maxLevel..", playerLevel="..playerLevel..", levelsAhead="..levelsAhead)
+				ZGV:Print("  - skipObsolete="..(skipObsolete and "YES" or "NO")..", showObsolete="..(showObsolete and "YES" or "NO"))
+				ZGV:Print("  - stepObsolete="..(stepObsolete and "YES" or "NO")..", goalObsolete="..(goalObsolete and "YES" or "NO"))
+				ZGV:Print("  - obsolete check: maxLevel("..maxLevel..") < playerLevel("..playerLevel..")-levelsAhead("..levelsAhead..") = "..(maxLevel < playerLevel - levelsAhead and "YES" or "NO"))
+			end
+			--]]
+			
 			if status~="complete" then  complete = false  end
 			if status=="incomplete" or (status=="obsolete" and not ZGV.db.profile.skipobsolete) --[[possible and not done--]] then  steppossible = true  end
 

@@ -52,17 +52,19 @@ local function GetQuestLeaderBoards(questindex)
 	local numgoals = tonumber(GetNumQuestLeaderBoards(questindex))
 	local goals = {}
 	local goalsNamed = {}
-	if numgoals>0 then
-		for g=1,numgoals,1 do
-			local leaderboard,type,complete = GetQuestLogLeaderBoard(g,questindex)
+	for g=1,numgoals do
+		local leaderboard,type,complete = GetQuestLogLeaderBoard(g,questindex)
+		if leaderboard then
 			local item,num,needed = ParseLeaderBoard(leaderboard,type)
-
 			-- fix bad leaderboards
 			if not needed then needed=1 end
 			if not num then num=complete and needed or 0 end
-
 			goals[g] = { item=item, num=num, needed=needed, type=type, complete=complete, leaderboard=leaderboard }
 			goalsNamed[item] = goals[g]
+		else
+			ZGV:Debug("Quest "..select(9,GetQuestLogTitle(questindex)).." claims "..numgoals.." goals but leaderboard ("..g..") says nil,"..tostring(type)..","..tostring(complete))
+			goals[g] = { item=type or "?", num=0, needed=1, type=type or "?", complete=complete, leaderboard=type or "?" }
+			goalsNamed["?"] = goals[g]
 		end
 	end
 	return goals,goalsNamed
@@ -152,6 +154,7 @@ function me:QuestTracking_CacheQuestLog()
 		if q.id then
 			self.questsbyid[q.id]=q
 		else
+			self:Debug("Quest '"..q.title.."' has no ID! What the hell?")
 			self:Print("Quest '"..q.title.."' has no ID! What the hell?")
 		end
 	end
