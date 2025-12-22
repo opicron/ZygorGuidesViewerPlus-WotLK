@@ -83,7 +83,7 @@ function MapSpot:Show()
 		self.waypoint.OnEnter = MapSpot_waypoint_OnEnter
 		self.waypoint.OnEvent = MapSpot_waypoint_OnEvent
 	end
-	zzself:UpdateVisibility()
+	self:UpdateVisibility()
 	return self.waypoint
 end
 
