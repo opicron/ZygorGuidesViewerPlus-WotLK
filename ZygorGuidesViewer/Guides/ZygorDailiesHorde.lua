@@ -14428,6 +14428,635 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dailies Guides\\Events\\Zalazane'
 		..turnin Zalazane's Fall##25445
 	step //22
 		'Congratulations, you've taken back Echo Isles for the Trolls!
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dailies Guides\\Events\\Hallow's End (October 18th - October 31st)\\Hallow's End Quests",[[
+	author support@zygorguides.com
+	description This guide section will walk you through completing the quests for the Hallow's End event.
+	step //1
+		goto Orgrimmar,51.5,69.5
+		.talk Orc Commoner##19175
+		..accept Masked Orphan Matron##11357
+	step //2
+		goto 71.5,22.8
+		.talk Spoops##15309
+		..accept Hallow's End Treats for Spoops!##8312
+	step //3
+		goto 54.1,68.4
+		.talk Innkeeper Gryshka##6929
+		..accept Flexing for Nougat##8359
+	step //4
+		goto 54.1,68.4
+		.' While targetting Innkeeper Gryshka:
+		.' Flex for Innkeeper Gryshka |script DoEmote("FLEX") |q 8359/1
+	step //5
+		goto 54.1,68.4
+		.talk Innkeeper Gryshka##6929
+		..turnin Flexing for Nougat##8359
+	step //6
+		goto 45.1,63.9
+		.talk Doras##3310
+		.' Fly to Thunder Bluff, Mulgore |goto Thunder Bluff,46.6,49.9,0.5 |noway |c
+	step //7
+		goto 45.8,64.7
+		.talk Innkeeper Pala##6746
+		..accept Dancing for Marzipan##8360
+	step //8
+		goto 45.8,64.7
+		.' While targetting Innkeeper Pala:
+		.' Dance for Innkeeper Pala |script DoEmote("DANCE") |q 8360/1
+	step //9
+		goto 45.8,64.7
+		.talk Innkeeper Pala##6746
+		..turnin Dancing for Marzipan##8360
+	step //10
+		goto 47.0,49.8
+		.talk Tal##2995
+		.' Fly to Orgrimmar, Durotar |goto Orgrimmar,45.3,63.8,0.5 |noway |c	
+	step //11
+		'Go outside to Durotar |goto Durotar |noway |c
+	step //12
+		goto Durotar,52.6,41.2
+		.talk Masked Orphan Matron##23973
+		..turnin Masked Orphan Matron##11357
+		..accept Fire Training##11361
+	step //13
+		goto 52.5,41.3
+		.' Click the Water Barrel |tip It looks like a huge bucket of water.
+		.collect Water Bucket##32971 |q 11361
+	step //14
+		goto 49.3,43.5
+		.' Use your Water Bucket on the burning scarecrows |use Water Bucket##32971
+		.' Fight 5 Fires |q 11361/1
+		.' Collect more Water Buckets from the Water Barrel at 49.2,44.5
+	step //15
+		goto 52.6,41.2
+		.talk Masked Orphan Matron##23973
+		..' You will only be able to accept 1 of the 2 daily quests
+		..turnin Fire Training##11361
+		..accept Stop the Fires!##11219 |or
+		..accept "Let the Fires Come!"##12139|or
+	step //16
+		goto 52.5,41.3
+		.' Click the Water Barrel |tip It looks like a huge bucket of water.
+		.collect Water Bucket##32971 |q 11219
+	step //17
+		goto 52.5,41.3
+		.' Click the Water Barrel |tip It looks like a huge bucket of water.
+		.collect Water Bucket##32971 |q 12139
+	step //18
+		goto 52.2,42.6
+		.' Use your Water Bucket on the fires all around this area |use Water Bucket##32971
+		.' Put Out the Fires |q 11219/1 |tip You will need a group of people to complete this quest.  It is best to do this quest at peak hours.
+		.' Collect more Water Buckets from the Water Barrel at 52.5,41.3
+	step //19
+		goto 52.2,42.6
+		.' Wait until the fires appear on the buildings in Razor Hill
+		.' Use your Water Bucket on the fires all around this area |use Water Bucket##32971
+		.' Put Out the Fires |q 12139/1 |tip You will need a group of people to complete this quest.  It is best to do this quest at peak hours.
+		.' Collect more Water Buckets from the Water Barrel at 52.5,41.3
+	step //20
+		goto 52.6,42.4
+		.' Click the Large Jack-o'-Lantern |tip It's a burning pumpkin laying in the road.
+		..accept Smash the Pumpkin##12155
+	step //21
+		goto 52.6,41.2
+		.talk Masked Orphan Matron##23973
+		..' You will only be able to accept 1 of the 2 daily quests
+		..turnin Stop the Fires!##11219
+		..turnin "Let the Fires Come!"##12139
+		..turnin Smash the Pumpkin##12155
+	step //22
+		goto 56.1,74.2
+		.talk Kali Remik##11814
+		..accept Incoming Gumdrop##8358
+	step //23
+		goto 56.1,74.2
+		.' While targetting Kali Remik:
+		.' Make Train sounds for Kali Remik |script DoEmote("TRAIN") |q 8358/1
+	step //24
+		goto 56.1,74.2
+		.talk Kali Remik##11814
+		..turnin Incoming Gumdrop##8358
+	step //25
+		goto 50.8,13.8 |n
+		.' Ride the zeppelin to Tirisfal Glades |goto Tirisfal Glades |noway |c
+	step //26
+		goto Tirisfal Glades,55.6,69.9
+		.' WARNING: Don't attempt to do these quests unless you are at least level 60 or so. |tip You will have to run through many level 45 guards, as well as enemy players, flagged as PvP.
+		.talk Darkcaller Yanka##15197
+		..accept Stinking Up Southshore##1657
+		..accept Rotten Eggs##8322
+	step //27
+		'Go southwest to Silverpine Forest |goto Silverpine Forest |noway |c
+	step //28
+		goto Silverpine Forest,45.6,42.6
+		.talk Karos Razok##2226
+		.' Fly to Tarren Mill, Hilsbrad |goto Hillsbrad Foothills,60.2,18.8,0.5 |noway |c
+	step //29
+		goto Hillsbrad Foothills,51.3,59.0
+		.' Click the Keg |tip It's the very top barrel in a pile of barrels inside the inn.
+		..turnin Rotten Eggs##8322
+		..accept Ruined Kegs##8409
+	step //30
+		goto 50.6,58.5
+		.' Use your Forsaken Stink Bomb Cluster 3 times around this area |use Forsaken Stink Bomb Cluster##20387
+		.' Toss 3 Stink Bombs into Southshore |q 1657/1
+	step //31
+		goto 60.1,18.6
+		.talk Zarise##2389
+		.' Fly to Undercity, Tirisfal |goto Undercity,63.1,48.3,0.5 |noway |c
+	step //32
+		goto Undercity,67.7,37.9
+		.talk Innkeeper Norman##6741
+		..accept Chicken Clucking for a Mint##8354
+	step //33
+		goto 67.7,37.9
+		.' While targetting Innkeeper Norman:
+		.' Cluck like a Chicken for Innkeeper Norman |script DoEmote("CHICKEN") |q 8354/1
+	step //34
+		goto 67.7,37.9
+		.talk Innkeeper Norman##6741
+		..turnin Chicken Clucking for a Mint##8354	
+	step //35
+		'Go outside to Tirisfal Glades |goto Tirisfal Glades |noway |c
+	step //36
+		goto Tirisfal Glades,55.6,69.9
+		.talk Darkcaller Yanka##15197
+		..turnin Stinking Up Southshore##1657
+		..turnin Ruined Kegs##8409
+	step //37
+		goto 60.7,58.8 |n
+		.' Ride the zeppelin to Durotar |goto Durotar |noway |c
+	step //38
+		'Go west into Orgrimmar |goto Orgrimmar |noway |c
+	step //39
+		goto Orgrimmar,71.5,22.8
+		.talk Spoops##15309
+		..turnin Hallow's End Treats for Spoops!##8312
+]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dailies Guides\\Events\\Hallow's End (October 18th - October 31st)\\Hallow's End Dailies",[[
+	author support@zygorguides.com
+	description This guide section will walk you through completing the daily quests for the Hallow's End event.
+	daily
+	step //1
+		goto Durotar,52.6,41.2
+		.talk Masked Orphan Matron##23973
+		..' You will only be able to accept 1 of the 2 daily quests
+		..accept Stop the Fires!##11219 |daily |or
+		..accept "Let the Fires Come!"##12139 |daily |or
+	step //2
+		goto 52.5,41.3
+		.' Click the Water Barrel |tip It looks like a huge bucket of water.
+		.collect Water Bucket##32971 |q 11219
+	step //3
+		goto 52.2,42.6
+		.' Use your Water Bucket on the fires all around this area |use Water Bucket##32971
+		.' Put Out the Fires |q 11219/1 |tip You will need a group of people to complete this quest.  It is best to do this quest at peak hours.
+		.' Collect more Water Buckets from the Water Barrel at 52.5,41.3
+	step //4
+		goto 52.5,41.3
+		.' Click the Water Barrel |tip It looks like a huge bucket of water.
+		.collect Water Bucket##32971 |q 12139
+	step //5
+		goto 52.2,42.6
+		.' Wait until the fires appear on the buildings in Razor Hill
+		.' Use your Water Bucket on the fires all around this area |use Water Bucket##32971
+		.' Put Out the Fires |q 12139/1 |tip You will need a group of people to complete this quest.  It is best to do this quest at peak hours.
+		.' Collect more Water Buckets from the Water Barrel at 52.5,41.3
+	step //6
+		goto 52.6,42.4
+		.' Click the Large Jack-o'-Lantern |tip It's a burning pumpkin laying in the road.
+		..accept Smash the Pumpkin##12155 |daily
+	step //7
+		goto 52.6,41.2
+		.talk Masked Orphan Matron##23973
+		..' You will only be able to accept 1 of the 2 daily quests
+		..turnin Stop the Fires!##11219
+		..turnin "Let the Fires Come!"##12139
+		..turnin Smash the Pumpkin##12155
+]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dailies Guides\\Events\\Hallow's End (October 18th - October 31st)\\Hallow's End Achievements",[[
+	author support@zygorguides.com
+	description This guide section will walk you through completing the achievements for the Hallow's End event.
+	step //1
+		goto Durotar,51.5,41.6
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Durotar, Razor Hill |achieve 965/10
+	step //2
+		'Go north to Orgrimmar |goto Orgrimmar |noway |c
+	step //3
+		goto Orgrimmar,54.4,68.6
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Orgrimmar, Valley of Strength |achieve 965/14
+	step //4
+		goto 45.1,63.9
+		.talk Doras##3310
+		.' Fly to Everlook, Winterspring |goto Winterspring,60.5,36.3,0.5 |noway |c
+	step //5
+		goto Winterspring,61.3,38.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Winterspring, Everlook |achieve 965/5
+	step //6
+		goto 60.5,36.3
+		.talk Yugrek##11139
+		.' Fly to Splintertree Post, Ashenvale |goto Ashenvale,73.3,61.7,0.5 |noway |c
+	step //7
+		goto Ashenvale,74.0,60.6
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Ashenvale, Splintertree Post |achieve 965/6
+	step //8
+		goto 73.2,61.6
+		.talk Vhulgra##12616		
+		.' Fly to Crossroads, The Barrens |goto The Barrens,51.5,30.4,0.5 |noway |c
+	step //9
+		goto The Barrens,52.0,29.9 
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Barrens, The Crossroads |achieve 965/8
+	step //10
+		goto 51.5,30.3
+		.talk Devrak##3615
+		.' Fly to Ratchet, The Barrens |goto 63.1,37.1,0.5 |noway |c
+	step //11
+		goto 62.1,39.4
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Barrens, Ratchet |achieve 965/1
+	step //12
+		goto 63.1,37.2
+		.talk Bragok##16227
+		.' Fly to Thunder Bluff, Mulgore |goto Thunder Bluff,46.6,49.9,0.5 |noway |c
+	step //13
+		goto Thunder Bluff,45.6,65.0
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Thunder Bluff, Lower Rise |achieve 965/16
+	step //14
+		goto 47.0,49.8
+		.talk Tal##2995
+		.' Fly to Sun Rock Retreat, Stonetalon Mountains |goto Stonetalon Mountains,45.2,59.9,0.5 |noway |c
+	step //15
+		goto Stonetalon Mountains,47.4,62.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Stonetalon Mountains, Sun Rock Retreat |achieve 965/15
+	step //16
+		goto 45.1,59.8
+		.talk Tharm##4312
+		.' Fly to Shadowprey Village, Desolace |goto Desolace,21.6,74.0,0.5 |noway |c
+	step //17
+		goto Desolace,24.1,68.3
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Desolace, Shadowprey Village |achieve 965/9
+	step //18
+		goto 21.6,74.1
+		.talk Thalon##6726
+		.' Fly to Thunder Bluff, Mulgore |goto Thunder Bluff,46.6,49.9,0.5 |noway |c
+	step //19
+		'Go outside to Mulgore |goto Mulgore |noway |c
+	step //20
+		goto Mulgore,46.6,61.0
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Mulgore, Bloodhoof Village |achieve 965/13
+	step //21
+		'Go west to The Barrens |goto The Barrens |noway |c
+	step //22
+		goto The Barrens,45.6,59.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Barrens, Camp Taurajo |achieve 965/7
+	step //23
+		goto 44.5,59.2
+		.talk Omusa Thunderhorn##10378
+		.' Fly to Brackenwall Village, Dustwallow Marsh |goto Dustwallow Marsh,35.6,31.8,0.5 |noway |c
+	step //24
+		goto Dustwallow Marsh,36.8,32.4
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Dustwallow Marsh, Brackenwall Village |achieve 965/11
+	step //25
+		goto 35.6,31.9
+		.talk Shardi##11899
+		.' Fly to Mudsprocket, Dustwallow Marsh |goto 42.9,72.4,0.5 |noway |c
+	step //26
+		goto 41.9,74.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Dustwallow Marsh, Mudsprocket |achieve 965/2
+	step //27
+		goto 42.8,72.4
+		.talk Dyslix Silvergrub##23612
+		.' Fly to Freewind Post, Thousand Needles |goto Thousand Needles,45.0,49.1,0.5 |noway |c
+	step //28
+		goto Thousand Needles,46.1,51.5
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Thousand Needles, Freewind Post |achieve 965/17
+	step //29
+		goto 45.1,49.1
+		.talk Nyse##4317
+		.' Fly to Camp Mojache, Feralas |goto Feralas,75.4,44.3,0.5 |noway |c
+	step //30
+		goto Feralas,74.8,45.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Feralas, Camp Mojache |achieve 965/12
+	step //31
+		goto 75.5,44.4
+		.talk Shyn##8020
+		.' Fly to Cenarion Hold, Silithus |goto Silithus,48.8,36.7,0.5 |noway |c
+	step //32
+		goto Silithus,51.8,39.2
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Silithus, Cenarion Hold |achieve 965/3
+	step //33
+		goto 48.7,36.7
+		.talk Runk Windtamer##15178
+		.' Fly to Gadgetzan, Tanaris |goto Tanaris,51.6,25.5,0.5 |noway |c
+	step //34
+		goto 52.5,27.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Tanaris, Gadgetzan |achieve 965/4
+	step //35
+		goto 51.6,25.4
+		.talk Bulkrek Ragefist##7824
+		.' Fly to Ratchet, The Barrens |goto The Barrens,63.1,37.1,0.5 |noway |c
+	step //36
+		goto The Barrens,63.6,38.6 |n
+		.' Ride the boat to Booty Bay |goto Stranglethorn Vale |noway |c
+	step //37
+		goto Stranglethorn Vale,27.1,77.3
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Stranglethorn Vale, Booty Bay |achieve 967/2
+	step //38
+		goto 26.9,77.1
+		.talk Gringer##2858
+		.' Fly to Grom'gol, Stranglethorn |goto 32.5,29.3,0.5 |noway |c
+	step //39
+		goto 31.5,29.7
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Stranglethorn Vale, Grom'gol Base Camp |achieve 967/13
+	step //40
+		goto 32.5,29.4
+		.talk Thysta##1387
+		.' Fly to Stonard, Swamp of Sorrows |goto Swamp of Sorrows,46.0,54.7,0.5 |noway |c
+	step //41
+		goto Swamp of Sorrows,45.1,56.7
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Swamp of Sorrows, Stonard |achieve 967/14
+	step //42
+		goto 46.1,54.8
+		.talk Breyk##6026
+		.' Fly to Kargath, Badlands |goto Badlands,4.1,44.9,0.5 |noway |c
+	step //43
+		goto Badlands,2.8,46.0
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Badlands, Kargath |achieve 967/4
+	step //44
+		goto 4.0,44.8
+		.talk Gorrik##2861
+		.' Fly to Hammerfall, Arathi |goto Arathi Highlands,73.1,32.6,0.5 |noway |c
+	step //45
+		goto Arathi Highlands,73.9,32.5
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Arathi Highlands, Hammerfall |achieve 967/3
+	step //46
+		goto 73.1,32.6
+		.talk Urda##2851
+		.' Fly to Revantusk Village, The Hinterlands |goto The Hinterlands,81.7,81.9,0.5 |noway |c
+	step //47
+		goto The Hinterlands,78.2,81.5
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Hinterlands, Revantusk Village |achieve 967/9
+	step //48
+		goto 81.7,81.8
+		.talk Gorkas##4314
+		.' Fly to Light's Hope Chapel, Eastern Plaguelands |goto Eastern Plaguelands,74.4,51.2,0.5 |noway |c
+	step //49
+		goto Eastern Plaguelands,75.9,52.2
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Eastern Plaguelands, Light's Hope Chapel |achieve 967/1
+	step //50
+		goto 74.5,51.2
+		.talk Georgia##12636
+		.' Fly to Tranquillien, Ghostlands |goto Ghostlands,45.5,30.6,0.5 |noway |c
+	step //51
+		goto Ghostlands,48.7,31.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Ghostlands, Tranquillien |achieve 967/7
+	step //52
+		'Go north to Eversong Woods |goto Eversong Woods |noway |c
+	step //53
+		goto Eversong Woods,43.7,71.0
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Eversong Woods, Fairbreeze Village |achieve 967/5
+	step //54
+		goto 48.2,47.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Eversong Woods, Falconwing Square |achieve 967/6
+	step //55
+		'Go west to Silvermoon City |goto Silvermoon City |noway |c
+	step //56
+		goto Silvermoon City,67.6,72.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Silvermoon, The Bazaar |achieve 967/10
+	step //57
+		goto 79.4,57.7
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Silvermoon, The Royal Exchange |achieve 967/11
+	step //58
+		goto 49.5,14.8
+		.' Click the Orb of Translocation |tip It looks like a floating red orb in a spinning golden stand.
+		.' Teleport to Undercity |goto Undercity |noway |c
+	step //59
+		goto Undercity,67.8,37.4
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Undercity, The Trade Quarter |achieve 967/16
+	step //60
+		'Go outside to Tirisfal Glades |goto Tirisfal Glades |noway |c
+	step //61
+		goto Tirisfal Glades,61.7,52.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Tirisfal Glades, Brill |achieve 967/15
+	step //62
+		'Go southwest to Silverpine Forest |goto Silverpine Forest |noway |c
+	step //63
+		goto Silverpine Forest,43.1,41.3
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Silverpine Forest, The Sepulcher |achieve 967/12
+	step //64
+		goto 45.6,42.6
+		.talk Karos Razok##2226
+		.' Fly to Tarren Mill, Hilsbrad |goto Hillsbrad Foothills,60.2,18.8,0.5 |noway |c
+	step //65
+		goto Hillsbrad Foothills,62.9,18.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Hillsbrad Foothills, Tarren Mill |achieve 967/8
+	step //66
+		goto 60.1,18.6
+		.talk Zarise##2389
+		.' Fly to Undercity, Tirisfal |goto Undercity,63.1,48.3,0.5 |noway |c
+	step //67
+		goto Undercity,85.3,17.1
+		.' Click the Portal to Blasted Lands 
+		.' Teleport to the Blasted Lands |goto Blasted Lands |noway |c
+	step //68
+		goto Blasted Lands,58.7,59.9 |n
+		.' Go into the huge green portal to Hellfire Peninsula |goto Hellfire Peninsula |noway |c
+	step //69
+		goto Hellfire Peninsula,56.8,37.4
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Hellfire Peninsula, Thrallmar |achieve 968/5
+	step //70
+		goto 26.9,59.5
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Hellfire Peninsula, Falcon Watch |achieve 968/3
+	step //71
+		goto Shattrath City,56.3,81.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Shattrath City, Scryer's Tier |achieve 968/12
+		only if rep ('The Scryers') >= Friendly
+	step //72
+		goto Shattrath City,28.2,49.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Shattrath City, Aldor Rise |achieve 968/12
+		only if rep ('The Aldor') >= Friendly
+	step //73
+		goto Terokkar Forest,48.7,45.2
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Terokkar Forest, Stonebreaker Hold |achieve 968/7
+	step //74
+		goto Shadowmoon Valley,30.3,27.7
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Shadowmoon Valley, Shadowmoon Village |achieve 968/6
+	step //75
+		goto 56.4,59.8
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Shadowmoon Valley, Sanctum of the Stars |achieve 968/14
+		only if rep ('The Scryers') >= Friendly
+	step //76
+		goto 61.0,28.2
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Shadowmoon Valley, Altar of Sha'tar |achieve 968/14
+		only if rep ('The Aldor') >= Friendly
+	step //77
+		goto Nagrand,56.7,34.5
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Nagrand, Garadar |achieve 968/4
+	step //78
+		goto Zangarmarsh,30.6,50.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Zangarmarsh, Zabra'jin |achieve 968/8
+	step //79
+		goto 78.5,62.9
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Zangarmarsh, Cenarion Refuge |achieve 968/15
+	step //80
+		goto Blade's Edge Mountains,76.2,60.4
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Blade's Edge Mountains, Mok'Nathal Village |achieve 968/1
+	step //81
+		goto 53.4,55.5
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Blade's Edge Mountains, Thunderlord Stronghold |achieve 968/2
+	step //82
+		goto 62.9,38.3
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Blade's Edge Mountains, Evergrove |achieve 968/9
+	step //83
+		goto Netherstorm,32.0,64.4
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Netherstorm, Area 52 |achieve 968/10
+	step //84
+		goto 43.3,36.1
+		.' Click the Candy Bucket |tip It looks like a jack-o-lantern bucket sitting on the ground inside the inn.
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents.
+		.' Visit the Candy Bucket in Netherstorm, The Stormspire |achieve 968/11
+	step //85
+		'You must be at least level 75 to complete this step:
+		.' Use the Dungeon Finder to queue for The Headless Horseman
+		.from Headless Horseman##23682
+		.' Complete the Bring Me The Head of... Oh Wait achievement |achieve 255
+	step //86
+		'Use your Tricky Treats 5 times in a row quickly |use Tricky Treat##33226 |tip You can only get these by killing The Headless Horseman in the previous guide step.
+		.' You will start puking :-)
+		.' Complete the Out With It achievement |achieve 288
+	step //87
+		'Talk to any innkeeper every hour and trick or treat, then open the Treat Bags they sometimes give you and do the following: |tip Keep any Hallowed Wands you may get from the Treat Bags, you'll need them later.
+		.collect Tooth Pick##37604 |n
+		.' Use your Tooth Pick |use Tooth Pick##37604
+		.' Show off your sparkling smile by using a Tooth Pick |achieve 981
+	step //88
+		'Use your Weighted Jack-o'-Lanterns on the following races: |use Weighted Jack-o'-Lantern##34068 |tip You receive Weighted Jack-o'-Lanterns by doing the Hallow's End daily quests.  Make sure the player doesn't already have a jack-o-lantern on their head or you won't get credit.  The best place to complete this is in Dalaran, but it can be done anywhere in the world.
+		.' Gnome |achieve 291/1
+		.' Blood Elf |achieve 291/2
+		.' Draenei |achieve 291/3
+		.' Dwarf |achieve 291/4
+		.' Human |achieve 291/5
+		.' Night Elf |achieve 291/6
+		.' Orc |achieve 291/7
+		.' Tauren |achieve 291/8
+		.' Troll |achieve 291/9
+		.' Undead |achieve 291/10
+	step //89
+		'Use any Hallowed Wands you may have collected on yourself to do the following: |tip A good strategy to get the transformations you don't have the wands for is to go to Dalaran and trade transformations with other players.  Also, you can offer to buy transformations from players if you don't have any transformations to trade, but this will be expensive.
+		.' Transform into a Bat |achieve 283/1
+		.' Transform into a Ghost |achieve 283/2
+		.' Transform into a Leper Gnome |achieve 283/3
+		.' Transform into a Ninja |achieve 283/4
+		.' Transform into a Pirate |achieve 283/5
+		.' Transform into a Skeleton |achieve 283/6
+		.' Transform into a Wisp |achieve 283/7
+	step //90
+		'Kill The Headless Horseman using the Dungeon Finder and open Treat Bags or Crudely Wrapped Gifts to do the following: |tip Talk to any innkeeper every hour to get Treat Bags, but you won't get them every time.  Do the Hallow's End daily quests to get Crudely Wrapped Gifts.  You must be at least level 75 to be able to kill The Headless Horseman.
+		.collect Sinister Squashling##33154 |n
+		.' Use the Sinister Squashling |use Sinister Squashling##33154
+		.' Obtain a Sinister Squashling pet |achieve 292/1
+		.' Obtain a Hallowed Helm |achieve 292/2
+	step //91
+		'Use your G.N.E.R.D.S. |use G.N.E.R.D.S.##37583 |tip Use them every 30 minutes while PvPing to keep the buff on.  If you don't have the buff active while killing players, you won't get credit.
+		.' Do any type of PvP of your choice |tip You must be killing players that give you honor.
+		.' Earn 50 honorable kills while under the influence of the G.N.E.R.D. buff |achieve 1261
+	step //92
+		'Congratulations, you are now one of The Hallowed!
 ]])
 
 ZygorGuidesViewer.HordeDailiesInstalled=true --!TRIAL

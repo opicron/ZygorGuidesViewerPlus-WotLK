@@ -20,6 +20,8 @@ Expanded with borders:
 * Loremaster guides
 * Various Achievement guides
 
+Note: `ZygorGuidesAlliance.lua` from my version was significantly different, kept this version in `_ORIGINAL` folder. While keeping the forked version.
+
 ## GM Changes:
 
 To use Zygor Guides Viewer to easily breeze through Wrath of the Lich King as a GM. Travelling commands added to teleport (.tele zone) and go (.go zonexy zoneid) to the waypoints/locations/zones in the guide.
