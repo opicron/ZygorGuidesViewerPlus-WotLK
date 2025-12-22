@@ -1,8 +1,42 @@
-# Information:
-This is designed for use in a Private Server using Trinity Core.
+# Zygor Guides Viewer WotLK 3.3.5
 
-All works credited to the original creator of ZygorGuides with minor tweaks to the guides as listed [Here](https://github.com/ErebusAres/ZygorGuidesPlus_3.3.5a-WOTLK/commits/main/).
+This is a modded Zygor Guides Viewer for WotLK 3.3.5. The goal was to minimize the UI and add GM functions for travelling to waypoints.
+It seems the original fork contained two versions combined. Removed a lot of code, added guides, minimized UI and added default settings.
 
-# Installation:
-* [Download](https://github.com/ErebusAres/ZygorGuidesPlus_3.3.5a-WOTLK/archive/refs/heads/main.zip) the Main ZIP file and extract it.
-* copy the 2 main folders `ZygorGuidesViewer` & `ZygorTalentAdvisor` into the AddOns folder located at `%WoWFolder%\Interface\AddOns`
+Minimal Mode:
+
+<todo>
+
+Expanded with borders:
+
+<todo>
+
+
+## Guides:
+
+* Ding80's guides
+* Danaton Quest Instance guides
+* Corey's Achievement guides
+* Loremaster guides
+* Various Achievement guides
+
+## GM Changes:
+
+To use Zygor Guides Viewer to easily breeze through Wrath of the Lich King as a GM. Travelling commands added to teleport (.tele zone) and go (.go zonexy zoneid) to the waypoints/locations/zones in the guide.
+
+Click on the coordinates/zones and you will be teleported to the correct zone and position on the map. When no coordinate is provided by the guide the zone is used instead.
+
+## UI Changes:
+
+The guides and compass have been moved to LEFT TOP of screen. Make sure to use RUF Raeli's Unit Frames or ElvUI. Regular Unit Frames will block the Zygor Guides Viewer.
+
+* Removed frame to create minimalistic UI
+* Moved buttons for minial Ui
+* Changed arrow position 
+* Changed Compass arrow icon to custom personal favorite
+* Removed distracting arrived icon
+* Adjusted default settings
+  - No skipping of low level quests (completist first)
+  - No borders
+  - No background
+  - No colored quest steps
