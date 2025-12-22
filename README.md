@@ -17,6 +17,7 @@ Expanded with borders:
 ## Guides:
 
 * Ding80's guides
+  * https://github.com/PolarCookie/PolarGuides
 * Danaton Quest Instance guides
   * https://github.com/danaton/ZygorGuidesWoTLK-ClassicPlus
 * Corey's Achievement guides
