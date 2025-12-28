@@ -36,6 +36,7 @@ Click on the coordinates/zones and you will be teleported to the correct zone an
 
 The guides and compass have been moved to LEFT TOP of screen. Make sure to use RUF Raeli's Unit Frames or ElvUI. Regular Unit Frames will block the Zygor Guides Viewer.
 
+* When clicking a quest goal (turn in/accept) Everyquest and LightHeaded open the correct quest
 * Removed frame to create minimalistic UI
 * Moved buttons for minial Ui
 * Changed arrow position 
