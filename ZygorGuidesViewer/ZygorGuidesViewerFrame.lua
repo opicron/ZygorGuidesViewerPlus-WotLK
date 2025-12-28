@@ -19,7 +19,12 @@ local obscured
 local function Step_OnClick(self,button)
 	if ZGV.CurrentStep==self.step then
 		for i=1,20,1 do
-			if MouseIsOver(self.lines[i].clicker) then self.lines[i].clicker:GetScript("OnClick")(self.lines[i].clicker,button) end
+			if MouseIsOver(self.lines[i].clicker) then 
+				local onClickScript = self.lines[i].clicker:GetScript("OnClick")
+				if onClickScript then
+					onClickScript(self.lines[i].clicker,button)
+				end
+			end
 		end
 		return
 	end
@@ -37,7 +42,10 @@ local function Step_OnUpdate(self,button)
 		for i=1,20,1 do
 			clicker=self.lines[i].clicker
 			if clicker.over and not MouseIsOver(clicker) then
-				clicker:GetScript("OnLeave")(clicker)
+				local onLeaveScript = clicker:GetScript("OnLeave")
+				if onLeaveScript then
+					onLeaveScript(clicker)
+				end
 				clicker.over=false
 			end
 		end
@@ -47,7 +55,10 @@ local function Step_OnUpdate(self,button)
 		for i=1,20,1 do
 			clicker=self.lines[i].clicker
 			if clicker:IsVisible() and MouseIsOver(clicker) and not clicker.over and not obscured then
-				clicker:GetScript("OnEnter")(clicker)
+				local onEnterScript = clicker:GetScript("OnEnter")
+				if onEnterScript then
+					onEnterScript(clicker)
+				end
 				clicker.over=true
 			end
 		end

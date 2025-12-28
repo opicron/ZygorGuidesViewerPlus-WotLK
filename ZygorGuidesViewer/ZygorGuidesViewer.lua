@@ -983,9 +983,8 @@ function me:UpdateFrame(full,onupdate)
 										frame.lines[line].label:SetText(indent..goaltxt..link)
 										frame.lines[line].goal = goal
 										
-										-- Set up clicker for coordinate goals only
-										if goal.action == "goto" and (goal.x or goal.map) and frame.lines[line].clicker then
-											--DEFAULT_CHAT_FRAME:AddMessage("Setting up clicker for goal: " .. (goal.action or "nil") .. " x=" .. tostring(goal.x) .. " map=" .. tostring(goal.map))
+										-- Set up clicker for coordinate goals AND accept/turnin quest goals only
+											if ((goal.action == "goto" and (goal.x or goal.map)) or (goal.questid and (goal.action == "accept" or goal.action == "turnin"))) and frame.lines[line].clicker then
 											
 											-- Make sure clicker is properly sized and positioned
 											local clicker = frame.lines[line].clicker
@@ -1008,8 +1007,9 @@ function me:UpdateFrame(full,onupdate)
 											end)
 											
 											clicker:SetScript("OnClick", function(self, button)
-												--DEFAULT_CHAT_FRAME:AddMessage("Clicker OnClick fired! Button: " .. tostring(button))
+												--DEFAULT_CHAT_FRAME:AddMessage("Clicker OnClick fired! Button: " .. tostring(button) .. " for goal action: " .. tostring(goal.action) .. " questid: " .. tostring(goal.questid))
 												if button == "LeftButton" then
+													-- Handle coordinate goals
 													if goal.x and goal.y and goal.map then
 														--DEFAULT_CHAT_FRAME:AddMessage("Clicked coordinate goal!")
 														
@@ -1035,23 +1035,39 @@ function me:UpdateFrame(full,onupdate)
 														-- Wait 0.5 seconds then check chat history for the response
 														Delay(0.5, function()
 															local foundZoneId = nil
+															local bestMatchScore = 0
 															local numMessages = DEFAULT_CHAT_FRAME:GetNumMessages()
 															if numMessages > 0 then
-																local message = DEFAULT_CHAT_FRAME:GetMessageInfo(numMessages)
-																if message then
-																	-- Strip color codes and keep only valid characters
-																	local cleanMessage = string.gsub(message, "|c%x+", "")
-																	cleanMessage = string.gsub(cleanMessage, "|r", "")
-																	cleanMessage = string.gsub(cleanMessage, "|H.-|h", "")
-																	cleanMessage = string.gsub(cleanMessage, "[^%w%s%[%]%-]", "")
-																	
-																	-- Look for pattern: number - [zonename
-																	local zoneId, zoneName = string.match(cleanMessage, "(%d+)%s*%-%s*%[([^%]]+)")
-																	if zoneId and zoneName then
-																		-- Remove " enUS" suffix if present
-																		zoneName = string.gsub(zoneName, "%s+enUS$", "")
-																		if string.lower(zoneName) == string.lower(goal.map) then
-																			foundZoneId = zoneId
+																-- Check the last 5 messages for zone lookup results
+																local startIndex = math.max(1, numMessages - 4)
+																for msgIndex = startIndex, numMessages do
+																	local message = DEFAULT_CHAT_FRAME:GetMessageInfo(msgIndex)
+																	if message then
+																		-- Strip color codes and keep only valid characters
+																		local cleanMessage = string.gsub(message, "|c%x+", "")
+																		cleanMessage = string.gsub(cleanMessage, "|r", "")
+																		cleanMessage = string.gsub(cleanMessage, "|H.-|h", "")
+																		cleanMessage = string.gsub(cleanMessage, "[^%w%s%[%]%-]", "")
+																		
+																		-- Look for pattern: number - [zonename
+																		local zoneId, zoneName = string.match(cleanMessage, "(%d+)%s*%-%s*%[([^%]]+)")
+																		if zoneId and zoneName then
+																			-- Remove " enUS" suffix if present
+																			zoneName = string.gsub(zoneName, "%s+enUS$", "")
+																			
+																			-- Calculate match score - exact match gets highest score
+																			local matchScore = 0
+																			if string.lower(zoneName) == string.lower(goal.map) then
+																				matchScore = 100  -- Exact match
+																			elseif string.find(string.lower(zoneName), string.lower(goal.map)) then
+																				matchScore = 50   -- Partial match
+																			end
+																			
+																			-- Use the best matching zone
+																			if matchScore > bestMatchScore then
+																				foundZoneId = zoneId
+																				bestMatchScore = matchScore
+																			end
 																		end
 																	end
 																end
@@ -1070,10 +1086,46 @@ function me:UpdateFrame(full,onupdate)
 														end)
 														
 													elseif goal.map and not goal.x then
-														DEFAULT_CHAT_FRAME:AddMessage("Clicked map-only goal!")
+														--DEFAULT_CHAT_FRAME:AddMessage("Clicked map-only goal!")
 														local command = string.format(".tele %s", goal.map)
 														DEFAULT_CHAT_FRAME:AddMessage("Executing: " .. command)
 														SendChatMessage(command, "SAY")
+													
+													-- Handle quest goals (only accept/turnin actions)
+													elseif goal.questid and (goal.action == "accept" or goal.action == "turnin") then
+														--DEFAULT_CHAT_FRAME:AddMessage("Clicked quest goal with ID: " .. tostring(goal.questid) .. " action: " .. tostring(goal.action))
+														
+														-- Open quest log first
+														if not QuestLogFrame:IsShown() then
+															--DEFAULT_CHAT_FRAME:AddMessage("Opening quest log")
+															if QuestLog_LoadUI then
+																QuestLog_LoadUI()
+															end
+															ShowUIPanel(QuestLogFrame)
+														end
+														
+														-- Open/show EveryQuest and find the quest
+														if _G["EveryQuest"] then
+															--DEFAULT_CHAT_FRAME:AddMessage("EveryQuest found, processing...")
+															-- Show EveryQuest frame if not already shown
+															if _G["EveryQuestFrame"] and not _G["EveryQuestFrame"]:IsShown() then
+																--DEFAULT_CHAT_FRAME:AddMessage("Opening EveryQuest frame")
+																_G["EveryQuest"]:Toggle()
+															end
+															
+															-- Use EveryQuest's quest selection function
+															if _G["EveryQuest_SelectQuestByID"] then
+																--DEFAULT_CHAT_FRAME:AddMessage("Calling EveryQuest_SelectQuestByID with ID: " .. tostring(goal.questid))
+																-- Small delay to ensure EveryQuest frame is fully shown
+																ZGV:ScheduleTimer(function()
+																	_G["EveryQuest_SelectQuestByID"](goal.questid)
+																end, 0.1)
+															else
+																DEFAULT_CHAT_FRAME:AddMessage("EveryQuest_SelectQuestByID function not found!")
+															end
+														else
+															DEFAULT_CHAT_FRAME:AddMessage("EveryQuest addon not found!")
+														end
 													end
 												end
 											end)
@@ -2913,21 +2965,45 @@ end
 
 
 function me:GoalOnClick(goalframe,button)
+	--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick fired! Button: " .. tostring(button))
+	
 	local stepframe = goalframe:GetParent():GetParent()
-	if not self.db.profile.showallsteps and stepframe.step~=self.CurrentStep then return end -- no clicking on non-current steps in compact mode
+	if not self.db.profile.showallsteps and stepframe.step~=self.CurrentStep then 
+		--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Not current step, returning")
+		return 
+	end -- no clicking on non-current steps in compact mode
 	--if stepframe:GetScript("OnClick") then stepframe:GetScript("OnClick")(stepframe,button) end
 
 	local goal = goalframe:GetParent().goal
-	if not goal then return end
+	if not goal then 
+		--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: No goal found")
+		return 
+	end
+	
+	--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Goal action=" .. tostring(goal.action) .. " questid=" .. tostring(goal.questid) .. " x=" .. tostring(goal.x))
+	
 	--local num=goalframe.goalnum
 	self:Debug("goal clicked "..tostring(goal.num))
 	--local goal = self.CurrentStep.goals[num]
 	if button=="LeftButton" then
 		if goal.x and not goal.force_noway then
+			--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Setting waypoint for coordinate goal")
 			self:SetWaypoint(goal.num)
-		elseif goal.questid then
+		elseif goal.questid and (goal.action == "accept" or goal.action == "turnin") then
+			--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Processing quest goal with ID: " .. tostring(goal.questid) .. " action: " .. tostring(goal.action))
 			--if InCombatLockdown() then return end
+			
+			-- Open quest log first
+			if not QuestLogFrame:IsShown() then
+				--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Opening quest log")
+				if QuestLog_LoadUI then
+					QuestLog_LoadUI()
+				end
+				ShowUIPanel(QuestLogFrame)
+			end
+			
 			if self.questsbyid[goal.questid] and WorldMap_OpenToQuest then -- 3.3.0
+				--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Opening world map to quest")
 				WorldMap_OpenToQuest(goal.questid)
 				local done,posX,posY,obj = QuestPOIGetIconInfo(goal.questid)
 				if posX or posY then
@@ -2938,6 +3014,30 @@ function me:GoalOnClick(goalframe,button)
 					self:SetWaypoint(posX*100,posY*100,title)
 				end
 			end
+			
+			-- Open/show EveryQuest and find the quest
+			if _G["EveryQuest"] then
+				--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: EveryQuest found, processing...")
+				-- Show EveryQuest frame if not already shown
+				if _G["EveryQuestFrame"] and not _G["EveryQuestFrame"]:IsShown() then
+					--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Opening EveryQuest frame")
+					_G["EveryQuest"]:Toggle()
+				end
+				
+				-- Use EveryQuest's quest selection function
+				if _G["EveryQuest_SelectQuestByID"] then
+					--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: Calling EveryQuest_SelectQuestByID with ID: " .. tostring(goal.questid))
+					-- Small delay to ensure EveryQuest frame is fully shown
+					self:ScheduleTimer(function()
+						_G["EveryQuest_SelectQuestByID"](goal.questid)
+					end, 0.1)
+				else
+					--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: EveryQuest_SelectQuestByID function not found!")
+				end
+			else
+				--DEFAULT_CHAT_FRAME:AddMessage("GoalOnClick: EveryQuest addon not found!")
+			end
+			
 			local max = self.maxQuestLevels[goal.questid]
 			self:Print("Quest \""..goal.quest.."\" (#"..tostring(goal.questid).."): done at level "..tostring(goal.parentStep.level)..", reaches to level "..tostring(max))
 			local mentioned = me:GetMentionedFollowups(goal.questid)
