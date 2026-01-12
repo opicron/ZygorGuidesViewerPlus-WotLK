@@ -1087,7 +1087,8 @@ function me:UpdateFrame(full,onupdate)
 														
 													elseif goal.map and not goal.x then
 														--DEFAULT_CHAT_FRAME:AddMessage("Clicked map-only goal!")
-														local command = string.format(".tele %s", goal.map)
+														local zoneName = string.gsub(goal.map, " ", "")
+														local command = string.format(".tele %s", zoneName)
 														DEFAULT_CHAT_FRAME:AddMessage("Executing: " .. command)
 														SendChatMessage(command, "SAY")
 													
